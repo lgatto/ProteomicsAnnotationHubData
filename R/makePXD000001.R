@@ -79,7 +79,7 @@ for (i in seq_along(fls)) {
             RDataClass =  .RDataClass[i],
             BiocVersion  =  BiocInstaller::biocVersion(),
             RDataDateAdded = Sys.time(),
-            Location_Prefix = .locationPrefix,
+            Location_Prefix = .locationPrefix[i],
             Recipe = .Recipe,
             DispatchClass = .DispatchClass,
             Tags = .Tags)
