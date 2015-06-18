@@ -2,6 +2,7 @@
 
 AnnotationHubMetadata <- AnnotationHubData:::AnnotationHubMetadata
 .expandLine <- AnnotationHubData:::.expandLine
+.amazonBaseUrl <- AnnotationHubData:::.amazonBaseUrl
 
 .ftpFileInfo <- function(...) {
     flInfo <- AnnotationHubData:::.ftpFileInfo(...)
