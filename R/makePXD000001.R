@@ -83,7 +83,7 @@ for (i in seq_along(fls)) {
             Recipe = .Recipe,
             DispatchClass = .DispatchClass,
             Tags = .Tags)
-    ## makeAnnotationHubResource(preparers[i],
-    ##                           function(currentMetadata, justRunUnitTest) 
-    ##                               AHMRecord)
+    makeAnnotationHubResource(preparers[i],
+                              function(currentMetadata, justRunUnitTest) 
+                                  AHMRecord)
 }
