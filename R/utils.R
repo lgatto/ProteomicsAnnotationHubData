@@ -9,10 +9,10 @@ AnnotationHubMetadata <- AnnotationHubData:::AnnotationHubMetadata
     flInfo
 }
 
-.ProteomicsAnnotationHubDataProviders <-
+ProteomicsAnnotationHubDataProviders <-
     c(PRIDE = "PRIDE")
 
-.ProteomicsAnnotationHubDataTags <-
+ProteomicsAnnotationHubDataTags <-
     c("Proteomics",
       "TMT6", "TMT10", "iTRAQ4", "iTRAQ8",
       "LFQ", "SC", "SILAC",

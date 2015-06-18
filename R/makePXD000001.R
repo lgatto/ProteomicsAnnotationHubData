@@ -6,7 +6,7 @@ fls <- c("TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML",
          "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid",
          "erwinia_carotovora.fasta")
 
-.SourceType <- c("mzML", "mzTab", "mzid", "fasta")
+.SourceType <- c("mzML", "mzTab", "mzid", "FASTA")
 .DispatchClass <- .RDataClass <- c("mzRpwiz", "MSnSet", "mzRident", "AAStringSet")
 
 ## Only if prepare rda file on AH Amazon instance
@@ -18,7 +18,7 @@ PXD00001MzTabToMSnSet <- function(ahm) {
     fin <- inputFiles(ahm) ## get file name on the ftp site
     fout <- outputFile(ahm)    
     fl <- download.file(fin, fout)
-    msnset <- MSnbase:::readMzTabData(fin, what = PEP)
+    msnset <- MSnbase::readMzTabData(fin, what = "PEP")
     save(msnset, file = "F063721.dat-MSnSet.rda")
    
     outputFile(ahm)    
@@ -45,7 +45,7 @@ flInfo$date <- as.character(flInfo$date)
 .Genome <- NA_character_
 .TaxonomyId <- 554L
 .Species <- "Erwinia carotovora"
-.DataProvider <- .ProteomicsAnnotationHubDataProviders['PRIDE']
+.DataProvider <- ProteomicsAnnotationHubDataProviders['PRIDE']
 .Maintainer <- "Laurent Gatto <lg390@cam.ac.uk>"
 .RDataPath <- file.path(.prideDir, fls)
 .Tags <- c("Proteomics", "TMT6", "LTQ Orbitrap Velos", "PMID:23692960")

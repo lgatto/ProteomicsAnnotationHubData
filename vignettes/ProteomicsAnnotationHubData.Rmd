@@ -28,16 +28,16 @@ TODO
 
 TODO: Describe tags
 
-```{r resources}
-ProteomicsAnnotationHubDataTags
+```{r tags, echo=FALSE}
+ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataTags
 ```
 
-## Resources
+## Providers
 
-A list of predefined/tested resources.
+A list of predefined/tested providers.
 
-```{r resources}
-ProteomicsAnnotationHubDataResources
+```{r providers, echo=FALSE}
+ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders
 ```
 
 # PXD000001
