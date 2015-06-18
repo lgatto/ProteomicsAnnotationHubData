@@ -1,0 +1,19 @@
+Package: ProteomicsAnnotationHubData
+Title: Transform public proteomics data resources into Bioconductor
+       Data Structures
+Version: 0.0.1
+Authors@R: c(person("Gatto", "Laurent", role=c("aut", "cre"),
+   	            email = "lg390@cam.ac.uk"),
+             person("Sonali", "Arora", role="aut"))
+Maintainer: Laurent Gatto <lg390@cam.ac.uk>
+Description: These recipes convert a variety and a growing number of
+             public proteomics data sets into easily-used standard
+             Bioconductor data structures.
+Depends: AnnotationHub, AnnotationHubData
+biocViews: DataImport
+VignetteBuilder: knitr
+License: Artistic-2.0
+Collate: ProteomicsAnnotationHubData.R
+	 utils.R
+	 makePXD000001.R
+	 zzz.R
