@@ -6,7 +6,7 @@ setMethod(".get1", "mzRpwizResource",
               openMSfile(yy, backend = "pwiz")
           })
 
-setClass("mzTabResource", contains="RdaRessouce")
+setClass("mzTabResource", contains="RdaResource")
 setMethod(".get1", "MSnSetResource",
           function(x, ...) {
               .require("MSnbase")
