@@ -63,7 +63,7 @@ flInfo$date <- as.character(flInfo$date)
 
 
 for (i in seq_along(fls)) {
-    AMDRecord <- 
+    AHMRecord <- 
         AnnotationHubMetadata(
             Title = .Title,
             Description = .Description,
