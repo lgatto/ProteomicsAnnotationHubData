@@ -80,7 +80,7 @@ for (i in seq_along(fls)) {
             BiocVersion  =  BiocInstaller::biocVersion(),
             RDataDateAdded = Sys.time(),
             Location_Prefix = .locationPrefix[i],
-            Recipe = .Recipe,
+            Recipe = .Recipe[i],
             DispatchClass = .DispatchClass,
             Tags = .Tags)
     makeAnnotationHubResource(preparers[i],
