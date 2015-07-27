@@ -17,7 +17,7 @@ VignetteBuilder: knitr
 License: Artistic-2.0
 Collate: ProteomicsAnnotationHubData.R
 	 utils.R
-	 makePXD000001.R
+	 PXD000001.R
 	 makePride_msnset.R
          makePride_mzid.R
          makePride_mzML.R

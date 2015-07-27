@@ -28,7 +28,6 @@ makePride_fasta <- function(currentMetadata, justRunUnitTest=FALSE){
     .RDataPath <- file.path(.prideDir, fls)
     .Tags <- c("Proteomics", "TMT6", "LTQ Orbitrap Velos", "PMID:23692960")
 
-
     list(AnnotationHubMetadata(
         Title = .Title,
         Description = .Description,
@@ -38,7 +37,7 @@ makePride_fasta <- function(currentMetadata, justRunUnitTest=FALSE){
         Species = .Species,
         Genome = .Genome,
         TaxonomyId = .TaxonomyId,
-           RDataPath = .RDataPath,
+        RDataPath = .RDataPath,
         DataProvider = .DataProvider,
         Maintainer = .Maintainer,
         RDataClass =  .RDataClass,
