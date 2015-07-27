@@ -1,3 +1,21 @@
+## NOTES:
+## Location_Prefix
+## - .prideBaseUrl: file in PRIDE ftp
+## - .amazonBaseUrl: file on AH S3
+
+## Default preparers
+## - PXD000001MzMLToMzRPwizPreparer
+## - PXD000001MzTabToMSnSetPreparer
+## - PXD000001MzidToMzRidentPreparer
+## - PXD000001MzMLToAAStringSetPreparer
+
+## SourceType:     mzML   mzTab  mzid     FASTA
+## DispatchClass: mzRpwiz MSnSet mzRident AAStringSet
+## RDataClass:    mzRpwiz MSnSet mzRident AAStringSet
+
+## Prepared functions and recipes are only required if the rda file is
+## prepared on the AH Amazon instance
+
 ## less typing
 AnnotationHubMetadata <- AnnotationHubData:::AnnotationHubMetadata
 .expandLine <- AnnotationHubData:::.expandLine
@@ -26,8 +44,10 @@ ProteomicsAnnotationHubDataTags <-
 ##' @param n The expected number of AH data objects to be documented.
 ##' @return \code{NULL}, if tested statements are
 ##'     \code{TRUE}. Otherwise throws an error.
-checkMetaDataList <- function(x, n) 
-    stopifnot(all(lengths(x) == n))
+checkMetaDataList <- function(x, n) {
+    stopifnot(lengths(x) == n)
+    stopifnot(x$DataProvider %in% ProteomicsAnnotationHubDataProviders)
+}
 
 ##' @title Fix length of metadata fields
 ##' @param x A list of metadata fields
@@ -113,7 +133,7 @@ makeAnnotationHubMetadata <- function(x,
                         BiocVersion  =  BiocInstaller::biocVersion(),
                         RDataDateAdded = Sys.time(),
                         Location_Prefix = x$Location_Prefix[ii],
-                        Recipe = NA_character_,
+                        Recipe = x$Recipe[ii],
                         DispatchClass = x$DispatchClass[ii],
                         Tags = x$Tags[[ii]])
         j <- j + 1

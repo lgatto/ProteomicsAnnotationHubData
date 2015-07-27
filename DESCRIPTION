@@ -1,7 +1,7 @@
 Package: ProteomicsAnnotationHubData
 Title: Transform public proteomics data resources into Bioconductor
        Data Structures
-Version: 0.0.1
+Version: 0.99.0
 Authors@R: c(person("Gatto", "Laurent", role=c("aut", "cre"),
    	            email = "lg390@cam.ac.uk"),
              person("Sonali", "Arora", role="aut"))
@@ -10,16 +10,12 @@ Description: These recipes convert a variety and a growing number of
              public proteomics data sets into easily-used standard
              Bioconductor data structures.
 Depends: AnnotationHub, AnnotationHubData
-Imports: mzR, MSnbase, Biostrings, Biobase, GenomeInfoDb
+Imports: mzR, MSnbase, Biostrings, GenomeInfoDb, utils
 Suggests: knitr, BiocStyle, rmarkdown
-biocViews: DataImport
+biocViews: DataImport, Proteomics
 VignetteBuilder: knitr
 License: Artistic-2.0
 Collate: ProteomicsAnnotationHubData.R
 	 utils.R
 	 PXD000001.R
-	 makePride_msnset.R
-         makePride_mzid.R
-         makePride_mzML.R
-         makePride_fasta.R
-	 zzz.R
+	 zzz.R	

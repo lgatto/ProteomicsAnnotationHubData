@@ -6,6 +6,9 @@ setMethod(".get1", "mzRpwizResource",
               openMSfile(yy, backend = "pwiz")
           })
 
+## For MSnSet instances that are made available as is
+setClass("MSnSetResource", contains="RdaResource")
+
 setClass("mzTabResource", contains="RdaResource")
 setMethod(".get1", "MSnSetResource",
           function(x, ...) {
@@ -21,7 +24,6 @@ setMethod(".get1", "mzRidentResource",
               yy <- cache(.hub(x))
               openIDfile(yy)
           })
-
 
 setClass("AAStringSetResource", contains="AnnotationHubResource")
 setMethod(".get1", "AAStringSetResource",

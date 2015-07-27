@@ -3,8 +3,9 @@ import("AnnotationHubData")
 import("MSnbase")
 import("mzR")
 import("Biostrings")
-import("Biobase")
 import("GenomeInfoDb")
 
+importFrom("utils",
+           "packageDescription", "vignette", "download.file")
 
 export(ProteomicsAnnotationHubData)
