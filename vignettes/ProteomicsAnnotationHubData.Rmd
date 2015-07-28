@@ -4,7 +4,7 @@ author: "Laurent Gatto"
 date: "`r doc_date()`"
 output:
   BiocStyle::html_document:
-    toc_depth: 1
+   toc_depth: 1
 ---
 
 <!--
@@ -20,19 +20,30 @@ BiocStyle::markdown()
 
 # Introduction
 
-TODO
+
+
+### Updates {-}
+
+To suggest updates and/or new mass spectrometry and/or proteomics
+data, please post your suggestions/request on the
+[Bioconductor support site](https://support.bioconductor.org/) or open
+a
+[github issue](https://github.com/lgatto/ProteomicsAnnotationHubData/issues).
+Contributions can also be made to the
+[package github repository](https://github.com/lgatto/ProteomicsAnnotationHubData).
 
 # Annotation
 
-## Tags
+### Tags {-}
 
-TODO: Describe tags
+A list of suggested tags is shown below. These suggestions will be
+updated and completed over time.
 
 ```{r tags, echo=FALSE}
 ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataTags
 ```
 
-## Providers
+### Providers  {-}
 
 A list of predefined/tested providers.
 
@@ -40,7 +51,29 @@ A list of predefined/tested providers.
 ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders
 ```
 
-# PXD000001
+### Location prefix {-}
+
+- `.prideBaseUrl` for files on the PRIDE ftp server.
+- `.amazonBaseUrl` for files on `AnnotationHub` S3 instance.
+
+### Source types {-}
+
+|---------------|---------|---------|-----------|--------------|--------|
+| SourceType    |  mzML   |   mzTab |   mzid    |      FASTA   | MSnSet |
+| DispatchClass | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
+| RDataClass    | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
+
+### Preparer functions {-}
+
+Preparer functions and recipes are only required if the `rda` file is
+prepared on the `AnnotationHub` Amazon S3 instance.
+
+
+# Available datasets
+
+## PXD000001
+
+Description
 
 > Expected reporter ion ratios: Erwinia peptides: 1:1:1:1:1:1 Enolase
 > spike (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10 BSA spike
@@ -52,7 +85,7 @@ Four data files from the PRIDE
 [PXD000001](http://www.ebi.ac.uk/pride/archive/projects/PXD000001)
 experiment are served through `AnnotationHub`.
 
-1. The raw data, via the
+1. The raw mass spectrometry data, via the
    `TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML`
    file from the PRDIE ftp site, served as an `mzRpwiz` object, from
    the `r Biocpkg("mzR")` package.

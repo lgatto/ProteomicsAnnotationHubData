@@ -1,21 +1,3 @@
-## NOTES:
-## Location_Prefix
-## - .prideBaseUrl: file in PRIDE ftp
-## - .amazonBaseUrl: file on AH S3
-
-## Default preparers
-## - PXD000001MzMLToMzRPwizPreparer
-## - PXD000001MzTabToMSnSetPreparer
-## - PXD000001MzidToMzRidentPreparer
-## - PXD000001MzMLToAAStringSetPreparer
-
-## SourceType:     mzML   mzTab  mzid     FASTA
-## DispatchClass: mzRpwiz MSnSet mzRident AAStringSet
-## RDataClass:    mzRpwiz MSnSet mzRident AAStringSet
-
-## Prepared functions and recipes are only required if the rda file is
-## prepared on the AH Amazon instance
-
 ## less typing
 AnnotationHubMetadata <- AnnotationHubData:::AnnotationHubMetadata
 .expandLine <- AnnotationHubData:::.expandLine
