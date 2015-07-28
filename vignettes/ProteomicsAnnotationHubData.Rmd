@@ -1,26 +1,86 @@
 ---
 title: "Proteomics Data in Annotation Hub"
-author: "Laurent Gatto"
-date: "`r doc_date()`"
 output:
   BiocStyle::html_document:
-   toc_depth: 1
+     toc: false
+     toc_depth: 1
+vignette: >
+  % \VignetteIndexEntry{Proteomics Data in Annotation Hub}
+  % \VignetteEngine{knitr::rmarkdown}
+  % \VignetteKeyword{proteomics, mass spectrometry, data}
+  % \VignettePackage{ProteomicsAnnotationHubData}
 ---
 
-<!--
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{Proteomics Data in Annotation Hub}
-%\VignetteKeyword{proteomics, mass spectrometry, data}
-%\VignettePackage{ProteomicsAnnotationHubData}
--->
 
 ```{r style, echo = FALSE, results = 'asis', message=FALSE}
 BiocStyle::markdown()
 ```
 
+**Package**: `r Biocpkg("ProteomicsAnnotationHubData")`<br />
+**Authors**: `r packageDescription("ProteomicsAnnotationHubData")[["Author"]] `<br />
+**Modified:** `r file.info("ProteomicsAnnotationHubData.Rmd")$mtime`<br />
+**Compiled**: `r date()`
+
+
 # Introduction
 
+About `r Biocpkg("AnnotationHub")`:
 
+> This package provides a client for the Bioconductor AnnotationHub
+> web resource. The AnnotationHub web resource provides a central
+> location where genomic files (e.g., VCF, bed, wig) and other
+> resources from standard locations (e.g., UCSC, Ensembl) can be
+> discovered. The resource includes metadata about each resource,
+> e.g., a textual description, tags, and date of modification. The
+> client creates and manages a local cache of files retrieved by the
+> user, helping with quick and reproducible access.
+
+The goal of this project is to expand this functionality to mass
+spectrometry and proteomics.
+
+
+See the `AnnotationHub`'s
+[How-To's](http://bioconductor.org/packages/devel/bioc/vignettes/AnnotationHub/inst/doc/AnnotationHub-HOWTO.html)
+and
+[Access the AnnotationHub Web Service](http://bioconductor.org/packages/devel/bioc/vignettes/AnnotationHub/inst/doc/AnnotationHub.html)
+vignettes for a description on how to use it.
+
+**TODO**: add example code for proteomics once the first data is available.
+
+# Available datasets
+
+## PXD000001
+
+Description
+
+> Expected reporter ion ratios: Erwinia peptides: 1:1:1:1:1:1 Enolase
+> spike (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10 BSA spike
+> (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1 PhosB spike
+> (sp|P00489|PYGM_RABIT): 2:2:2:2:1:1 Cytochrome C spike
+> (sp|P62894|CYC_BOVIN): 1:1:1:1:1:2.
+
+Four data files from the PRIDE
+[PXD000001](http://www.ebi.ac.uk/pride/archive/projects/PXD000001)
+experiment are served through `AnnotationHub`.
+
+1. The raw mass spectrometry data, via the
+   `TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML`
+   file from the PRDIE ftp site, served as an `mzRpwiz` object, from
+   the `r Biocpkg("mzR")` package.
+
+2. The `mzTab` file, via the `F063721.dat-mztab.txt` file from the
+   PRIDE ftp site, served as an `MSnSet` object, from the
+   `r Biocpkg("MSnbase")` package.
+
+3. The protein data base, via the `erwinia_carotovora.fasta` file from
+	the PRIDE ftp server, served as a `AAStringSet` object, from the
+	`r Biocpkg("Biostrings")` package.
+
+4. The identification results, produced using the `MSGF+` search
+   engine, served as a `mzRident` object, from the `r Biocpkg("mzR")`
+   package.
+
+# Annotation
 
 ### Updates {-}
 
@@ -31,8 +91,6 @@ a
 [github issue](https://github.com/lgatto/ProteomicsAnnotationHubData/issues).
 Contributions can also be made to the
 [package github repository](https://github.com/lgatto/ProteomicsAnnotationHubData).
-
-# Annotation
 
 ### Tags {-}
 
@@ -67,37 +125,3 @@ ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders
 
 Preparer functions and recipes are only required if the `rda` file is
 prepared on the `AnnotationHub` Amazon S3 instance.
-
-
-# Available datasets
-
-## PXD000001
-
-Description
-
-> Expected reporter ion ratios: Erwinia peptides: 1:1:1:1:1:1 Enolase
-> spike (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10 BSA spike
-> (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1 PhosB spike
-> (sp|P00489|PYGM_RABIT): 2:2:2:2:1:1 Cytochrome C spike
-> (sp|P62894|CYC_BOVIN): 1:1:1:1:1:2.
-
-Four data files from the PRIDE
-[PXD000001](http://www.ebi.ac.uk/pride/archive/projects/PXD000001)
-experiment are served through `AnnotationHub`.
-
-1. The raw mass spectrometry data, via the
-   `TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML`
-   file from the PRDIE ftp site, served as an `mzRpwiz` object, from
-   the `r Biocpkg("mzR")` package.
-
-2. The `mzTab` file, via the `F063721.dat-mztab.txt` file from the
-   PRIDE ftp site, served as an `MSnSet` object, from the
-   `r Biocpkg("MSnbase")` package.
-
-3. The protein data base, via the `erwinia_carotovora.fasta` file from
-	the PRIDE ftp server, served as a `AAStringSet` object, from the
-	`r Biocpkg("Biostrings")` package.
-
-4. The identification results, produced using the `MSGF+` search
-   engine, served as a `mzRident` object, from the `r Biocpkg("mzR")`
-   package.
