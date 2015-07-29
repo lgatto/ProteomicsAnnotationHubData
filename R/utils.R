@@ -29,6 +29,7 @@ ProteomicsAnnotationHubDataTags <-
 checkMetaDataList <- function(x, n) {
     stopifnot(lengths(x) == n)
     stopifnot(x$DataProvider %in% ProteomicsAnnotationHubDataProviders)
+    stopifnot(anyDuplicated(names(x)) == 0)
 }
 
 ##' @title Fix length of metadata fields
@@ -60,7 +61,7 @@ addSourceUrlVersion <- function(x) {
     x
 }
 
-##' @title Adds an RDataP
+##' @title Adds an RDataPath
 ##' ath field
 ##' @param x A list of metadata fields, containing SourceUrl and
 ##'     SourceVersion fields.
