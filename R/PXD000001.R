@@ -1,9 +1,14 @@
 .prideDir <- "pride/data/archive/2012/03/PXD000001/"
 
 PXD000001 <- list(
-    Title = "Four human TMT spliked-in proteins in an Erwinia carotovora background",
+    Title = c(
+        "PXD000001: Erwinia carotovora and spiked-in protein fasta file",
+        "PXD000001: Peptide-level quantitation data",
+        "PXD000001: MS-GF+ identiciation data",
+        "PXD000001: raw mass spectrometry data"),
     Description =  AnnotationHubData:::.expandLine(
-        "Expected reporter ion ratios: Erwinia peptides: 1:1:1:1:1:1;
+        "Four human TMT spliked-in proteins in an Erwinia carotovora background.
+         Expected reporter ion ratios: Erwinia peptides: 1:1:1:1:1:1;
          Enolase spike (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10;
          BSA spike (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1;
          PhosB spike (sp|P00489|PYGM_RABIT): 2:2:2:2:1:1;
