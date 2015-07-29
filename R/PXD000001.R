@@ -1,5 +1,14 @@
 .prideDir <- "pride/data/archive/2012/03/PXD000001/"
 
+## FILES:
+## 1. erwinia_carotovora.fasta: from PRIDE server, stored as
+##    AAStringSet on AH S3.
+## 2. F063721.dat-mztab.txt: from PRIDE, stored as MSnSet on AH S3.
+## 3. TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid:
+##    from AH S4 server, loaded by mzR:openIDfile.
+## 4. TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML:
+##    from PRIDE server, load by mzR::openMSfile.
+
 PXD000001 <- list(
     Title = c(
         "PXD000001: Erwinia carotovora and spiked-in protein fasta file",
@@ -21,7 +30,7 @@ PXD000001 <- list(
         NA_character_),
     Location_Prefix = c(
         .prideBaseUrl, 
-        .prideBaseUrl, 
+        AnnotationHubData:::.amazonBaseUrl,
         AnnotationHubData:::.amazonBaseUrl, 
         .prideBaseUrl),
     Species = "Erwinia carotovora",
@@ -34,10 +43,6 @@ PXD000001 <- list(
     DataProvider = "PRIDE",
     Maintainer = "Laurent Gatto <lg390@cam.ac.uk>", 
     RDataClass = c("AAStringSet", "MSnSet", "mzRident", "mzRpwiz"),
-    Recipe = c(NA_character_,
-               "ProteomicsAnnotationHubData:::PXD00001MzTabToMSnSet",
-               NA_character_,
-               NA_character_),
     DispatchClass = c("AAStringSet", "MSnSet", "mzRident", "mzRpwiz"),
     Tags = list(c("Proteomics", "TMT6", "LTQ Orbitrap Velos", "PMID:23692960")))
 n <- 4
