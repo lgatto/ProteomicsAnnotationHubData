@@ -116,7 +116,26 @@ ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders
 | DispatchClass | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
 | RDataClass    | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
 
-### Data location and associated metadata
+### Data location and associated metadata {-}
+
+- The `Recipe` is a short function is a function, typically named
+  `NameOfDataOrigformatToFinalformat`, that converts the original data
+  into on compatible with `R`/Bioconductor.
+
+- `Location_Prefix` is either `.amazonBaseUrl`, when the file exists
+  on the AH Amazon S3 instance, or `.prideBaseUrl` when on the PRIDE
+  ftp server.
+
+- `SourceURL` is the location of the original file. This is generally
+  the third-party server, but not necessarily.
+
+- `RDataPath` is the path and filename of the file to be read into `R`
+  and provided to the user. This field does not contain the server
+  address `.prideBaseUrl` or `.amazonBaseUrl`.
+
+- The metadata list, used to create the `AnnotationHubResources` also
+  uses a `SourceBaseUrl`, which is the full url minus file name (that
+  is in `File`) of the original file. Used to construct `SourceUrl`.
 
 For files that need to be downloaded from a third-party provider such
 as the PRIDE server and then pre-processed, the pre-processed product
@@ -127,7 +146,7 @@ object from Amazon S3 instance:
 - the `Location_Prefix` **should be** the `.amazonBaseUrl`.
 - the `RDataPath` should correspond to the directory structure after
   `.amazonBaseUrl` on the Amazon s3 instance. Typically, the directory
-  structure on the Amazon S3 instance mimicts the directory structure
+  structure on the Amazon S3 instance mimics the directory structure
   on the original server.
 - the `SourceUrl` should be the actual url on third-party server.
 
@@ -140,7 +159,7 @@ directly into `R` without any pre-processing:
 - the `RDdataPath` should be `sub(.prideBaseUrl, "", SourceUrl)`
 - the `SourceUrl` should be the actual url on third-party server.
 
-#### Location prefix {-}
+### Location prefix {-}
 
 - `.prideBaseUrl` for files on the PRIDE ftp server.
 - `.amazonBaseUrl` for files on `AnnotationHub` S3 instance.

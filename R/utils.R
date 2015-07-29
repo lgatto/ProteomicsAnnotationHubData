@@ -49,7 +49,7 @@ fixMetaDataList <- function(x, n) {
 ##' @param x A list of metadata fields, containing a FullUrl field.
 ##' @return Update list of metadat fields
 addSourceUrlVersion <- function(x) {
-    x$FullUrl <- paste0(x$Location_Prefix, .prideDir)
+    x$FullUrl <- paste0(x$SourceBaseUrl, .prideDir)
     flInfo <- Map(ProteomicsAnnotationHubData:::.ftpFileInfo,
                   url = x$FullUrl,
                   filename = x$File,
@@ -60,19 +60,6 @@ addSourceUrlVersion <- function(x) {
     x$SourceVersion <- flInfo[, 2]
     x
 }
-
-##' @title Adds an RDataPath
-##' ath field
-##' @param x A list of metadata fields, containing SourceUrl and
-##'     SourceVersion fields.
-##' @return Update list of metadat fields
-addRDataPath <- function(x) {
-    if (is.null(x$SourceUrl) | is.null(x$SourceVersion))
-        x <- addSourceUrlVersion(x)
-    x$RDataPath <- paste0(.prideDir, x$File)
-    x
-}
-
 
 ##' @title Order AH metadata by \code{RDataClass}
 ##' @param x A list of metadata fields

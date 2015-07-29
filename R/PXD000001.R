@@ -8,6 +8,7 @@
 ##    from AH S4 server, loaded by mzR:openIDfile.
 ## 4. TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML:
 ##    from PRIDE server, load by mzR::openMSfile.
+n <- 4
 
 PXD000001 <- list(
     Title = c(
@@ -24,15 +25,27 @@ PXD000001 <- list(
          Cytochrome C spike (sp|P62894|CYC_BOVIN): 1:1:1:1:1:2."),
     SourceType = c("FASTA", "mzTab", "mzid", "mzML"),
     Recipe = c(
-        NA_character_,
-        "ProteomicsAnnotationHubData:::PXD00001MzTabToMSnSet",
+        "ProteomicsAnnotationHubData:::PXD000001FastaToAAStringSet",
+        "ProteomicsAnnotationHubData:::PXD000001MzTabToMSnSet",
         NA_character_,
         NA_character_),
+    RDataPath = c(
+        "pride/data/archive/2012/03/PXD000001/erwinia_carotovora.rda",
+        "pride/data/archive/2012/03/PXD000001/F063721.dat-MSnSet.rda",
+        "pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid",
+        "pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"
+    ),
     Location_Prefix = c(
-        .prideBaseUrl, 
+        AnnotationHubData:::.amazonBaseUrl,
         AnnotationHubData:::.amazonBaseUrl,
         AnnotationHubData:::.amazonBaseUrl, 
         .prideBaseUrl),
+    SourceBaseUrl = c(
+        .prideBaseUrl,
+        .prideBaseUrl,
+        AnnotationHubData:::.amazonBaseUrl,
+        .prideBaseUrl
+    ),
     Species = "Erwinia carotovora",
     Genome = NA_character_, 
     TaxonomyId = 554L,
@@ -45,10 +58,9 @@ PXD000001 <- list(
     RDataClass = c("AAStringSet", "MSnSet", "mzRident", "mzRpwiz"),
     DispatchClass = c("AAStringSet", "MSnSet", "mzRident", "mzRpwiz"),
     Tags = list(c("Proteomics", "TMT6", "LTQ Orbitrap Velos", "PMID:23692960")))
-n <- 4
 
 PXD000001 <- fixMetaDataList(PXD000001, n)
-PXD000001 <- addRDataPath(PXD000001) ## calls addSourceUrlVersion
+PXD000001 <- addSourceUrlVersion(PXD000001)
 PXD000001 <- orderMetaDataList(PXD000001)
 checkMetaDataList(PXD000001, n)
 
@@ -61,13 +73,13 @@ makePXD000001mzid <- function(currentMetadata, justRunUnitTest = FALSE)
 makePXD000001mzML <- function(currentMetadata, justRunUnitTest = FALSE)
     makeAnnotationHubMetadata(PXD000001, resource = "mzML")
 
-makeAnnotationHubResource("PXD000001MzMLToAAStringSetPreparer", makePXD000001fasta)
+makeAnnotationHubResource("PXD000001FastaToAAStringSetPreparer", makePXD000001fasta)
 makeAnnotationHubResource("PXD000001MzTabToMSnSetPreparer", makePXD000001mzTab)
 makeAnnotationHubResource("PXD000001MzidToMzRidentPreparer", makePXD000001mzid)
 makeAnnotationHubResource("PXD000001MzMLToMzRPwizPreparer", makePXD000001mzML)
 
 ## Preparer function
-PXD00001MzTabToMSnSet <- function(ahm) {
+PXD000001MzTabToMSnSet <- function(ahm) {
     ## Imports: MSnbase
     if (file.exists(outputFile(ahm)))
         return(outputFile(ahm))
@@ -79,3 +91,14 @@ PXD00001MzTabToMSnSet <- function(ahm) {
     outputFile(ahm)
 }
 
+PXD000001FastaToAAStringSet <- function(ahm) {
+    ## Imports: Biostrings
+    if (file.exists(outputFile(ahm)))
+        return(outputFile(ahm))
+    fin <- inputFiles(ahm) ## get file name on the ftp site
+    fout <- outputFile(ahm)
+    fl <- download.file(fin, fout)
+    msnset <- Biostrings::readAAStringSet(fin)
+    save(msnset, file = "erwinia_carotovora.rda")
+    outputFile(ahm)
+}
