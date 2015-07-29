@@ -109,17 +109,41 @@ A list of predefined/tested providers.
 ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders
 ```
 
-### Location prefix {-}
-
-- `.prideBaseUrl` for files on the PRIDE ftp server.
-- `.amazonBaseUrl` for files on `AnnotationHub` S3 instance.
-
 ### Source types {-}
 
 |---------------|---------|---------|-----------|--------------|--------|
 | SourceType    |  mzML   |   mzTab |   mzid    |      FASTA   | MSnSet |
 | DispatchClass | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
 | RDataClass    | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
+
+### Data location and associated metadata
+
+For files that need to be downloaded from a third-party provider such
+as the PRIDE server and then pre-processed, the pre-processed product
+being strored to Amazon s3 machine and the user directly gets the
+object from Amazon S3 instance:
+
+- the `Recipe` argument **should not be** `NA`.
+- the `Location_Prefix` **should be** the `.amazonBaseUrl`.
+- the `RDataPath` should correspond to the directory structure after
+  `.amazonBaseUrl` on the Amazon s3 instance. Typically, the directory
+  structure on the Amazon S3 instance mimicts the directory structure
+  on the original server.
+- the `SourceUrl` should be the actual url on third-party server.
+
+
+For files that are downloaded from the third-party resource and loaded
+directly into `R` without any pre-processing:
+
+- the `Recipe` argument **should be** `NA`.
+- the `Location_Prefix` should be the `.prideBaseUrl`.
+- the `RDdataPath` should be `sub(.prideBaseUrl, "", SourceUrl)`
+- the `SourceUrl` should be the actual url on third-party server.
+
+#### Location prefix {-}
+
+- `.prideBaseUrl` for files on the PRIDE ftp server.
+- `.amazonBaseUrl` for files on `AnnotationHub` S3 instance.
 
 ### Preparer functions {-}
 
