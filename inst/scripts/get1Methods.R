@@ -24,6 +24,14 @@ setMethod(".get1", "mzRidentResource",
               yy <- cache(.hub(x))
               openIDfile(yy)
           })
+          
+setClass("MSnSetResource", contains="AnnotationHubResource")
+setMethod(".get1", "MSnSetResource",
+    function(x, ...)
+{
+    yy <- cache(.hub(x))
+    read.delim(yy, skip=10)
+})
 
 setClass("AAStringSetResource", contains="AnnotationHubResource")
 setMethod(".get1", "AAStringSetResource",
