@@ -149,8 +149,15 @@ provider. Multiple scenarios are can occur:
 ### Definitions {-}
 
 - The `Recipe` is a short function, typically named
-  `NameOfDataOrigformatToFinalformat`, that converts the original data
-  into on compatible with R/Bioconductor.
+  `NameOfDataOrigformatToFinalformat`, that generally converts the
+  original data into on compatible with R/Bioconductor or enable to
+  read the data directly using a special data accessor.
+
+  For example, for some `fasta` files, the recipe function uses the
+  `Rsamtools::indexFa` function to create an index file without
+  converting the original file. Similarly, raw mass-spectrometry files
+  are not converted into objects *per se*, but an accessor object is
+  produced to extract data directly from the data file.
 
 - `Location_Prefix` is either `.amazonBaseUrl`, when the file to be
   loaded/read by the user exists on the AH Amazon S3 instance, or
