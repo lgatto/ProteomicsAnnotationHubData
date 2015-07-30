@@ -10,11 +10,11 @@ insertFlag <- FALSE
 
 (fas <- updateResources(ahroot, BiocVersion,insert = insertFlag, 
                         preparerClasses = "PXD000001FastaToAAStringSetPreparer",
-                        metadataOnly = TRUE , justRunUnitTest = FALSE))
+                        metadataOnly = FALSE , justRunUnitTest = FALSE))
 
 (msn <- updateResources(ahroot, BiocVersion, insert = insertFlag ,
                         preparerClasses = "PXD000001MzTabToMSnSetPreparer",
-                        metadataOnly = TRUE , justRunUnitTest = FALSE))
+                        metadataOnly = FALSE , justRunUnitTest = FALSE))
 
 (mzml <- updateResources(ahroot, BiocVersion, insert = insertFlag,
                          preparerClasses = "PXD000001MzMLToMzRPwizPreparer",
