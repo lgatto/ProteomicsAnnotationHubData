@@ -80,7 +80,10 @@ experiment are served through `AnnotationHub`.
    engine, served as a `mzRident` object, from the `r Biocpkg("mzR")`
    package.
 
-# Annotation
+
+# Data and metadata
+
+## Annotation {-}
 
 ### Updates {-}
 
@@ -116,7 +119,32 @@ ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders
 | DispatchClass | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
 | RDataClass    | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
 
-### Data location and associated metadata {-}
+## Data location and associated metadata {-}
+
+### Overview {-}
+
+The data accessed through the `r Biocpkg("AnnotationHub")`
+infrastructure exists, in different forms, in different
+locations. These locations can be the user's computer, the
+AnnotationHub Amazon S3 instance and the original data
+provider. Multiple scenarios are can occur:
+
+1. The data originates from the provider's public repository. It is
+   directly server to the user, from that third-party server, with
+   possible local processing/coercion and made accessible as a
+   Bioconductor data object.
+
+2. The data originates from the provider's public repository. However,
+   conversion to a Bioconductor data object is time-consuming or it is
+   anticipated that this would be repeated many times. The data is
+   therefor copied, processed and stored on the AnnotationHub Amazon
+   S3 instance and server from there upon request.
+
+3. The original file is not available from a data provider, is stored
+   on the AnnotationHub Amazon S3 instance and, possibly
+   pre-processed. Upon request, it is served to the user.
+
+### Definitions {-}
 
 - The `Recipe` is a short function, typically named
   `NameOfDataOrigformatToFinalformat`, that converts the original data
@@ -126,13 +154,12 @@ ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders
   loaded/read by the user exists on the AH Amazon S3 instance, or
   `.prideBaseUrl` when it lives on the PRIDE ftp server.
 
-- `SourceURL` is the full location of the original file. This is
+- `SourceUrl` is the full location of the original file. This is
   generally the third-party server, but not necessarily.
 
 - `RDataPath` is the path and filename of the file to be read into `R`
   and provided to the user. This field does not contain the server
-  address `.prideBaseUrl` or `.amazonBaseUrl` (see
-  (`Location_Prefix`).
+  address `.prideBaseUrl` or `.amazonBaseUrl` (see `Location_Prefix`).
 
 - The metadata list, used to create the `AnnotationHubResources` also
   uses a `SourceBaseUrl`, which is the full url minus file name (that
