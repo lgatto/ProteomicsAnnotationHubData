@@ -86,7 +86,7 @@ PXD000001MzTabToMSnSet <- function(ahm) {
     fin <- inputFiles(ahm) ## get file name on the ftp site
     fout <- outputFile(ahm)
     fl <- download.file(fin, fout)
-    msnset <- MSnbase::readMzTabData(fin, what = "PEP")
+    msnset <- MSnbase::readMzTabData(fin, what = "PEP", version = "0.9")
     save(msnset, file = "F063721.dat-MSnSet.rda")
     outputFile(ahm)
 }
