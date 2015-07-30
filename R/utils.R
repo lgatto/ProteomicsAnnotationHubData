@@ -12,7 +12,8 @@ AnnotationHubMetadata <- AnnotationHubData:::AnnotationHubMetadata
 }
 
 ProteomicsAnnotationHubDataProviders <-
-    c(PRIDE = "PRIDE")
+    list(PRIDE = c(name = "PRIDE", baseUrl = .prideBaseUrl),
+         AHS3 = c(name = "AHS3", baseUrl = .amazonBaseUrl))
 
 ProteomicsAnnotationHubDataTags <-
     c("Proteomics",
@@ -28,7 +29,7 @@ ProteomicsAnnotationHubDataTags <-
 ##'     \code{TRUE}. Otherwise throws an error.
 checkMetaDataList <- function(x, n) {
     stopifnot(lengths(x) == n)
-    stopifnot(x$DataProvider %in% ProteomicsAnnotationHubDataProviders)
+    stopifnot(x$DataProvider %in% names(ProteomicsAnnotationHubDataProviders))
     stopifnot(anyDuplicated(names(x)) == 0)
 }
 
