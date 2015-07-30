@@ -21,7 +21,6 @@ BiocStyle::markdown()
 **Modified:** `r file.info("ProteomicsAnnotationHubData.Rmd")$mtime`<br />
 **Compiled**: `r date()`
 
-
 # Introduction
 
 About `r Biocpkg("AnnotationHub")`:
@@ -53,24 +52,26 @@ vignettes for a description on how to use it.
 
 Description
 
-> Expected reporter ion ratios: Erwinia peptides: 1:1:1:1:1:1 Enolase
-> spike (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10 BSA spike
-> (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1 PhosB spike
-> (sp|P00489|PYGM_RABIT): 2:2:2:2:1:1 Cytochrome C spike
+> Four human TMT spliked-in proteins in an Erwinia carotovora
+> background. Expected reporter ion ratios: Erwinia peptides:
+> 1:1:1:1:1:1; Enolase spike (sp|P00924|ENO1_YEAST):
+> 10:5:2.5:1:2.5:10; BSA spike (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1;
+> PhosB spike (sp|P00489|PYGM_RABIT): 2:2:2:2:1:1; Cytochrome C spike
 > (sp|P62894|CYC_BOVIN): 1:1:1:1:1:2.
+
 
 Four data files from the PRIDE
 [PXD000001](http://www.ebi.ac.uk/pride/archive/projects/PXD000001)
 experiment are served through `AnnotationHub`.
 
-1. The raw mass spectrometry data, via the
+1. The raw mass spectrometry data from the
    `TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML`
    file from the PRDIE ftp site, served as an `mzRpwiz` object, from
    the `r Biocpkg("mzR")` package.
 
-2. The `mzTab` file, via the `F063721.dat-mztab.txt` file from the
-   PRIDE ftp site, served as an `MSnSet` object, from the
-   `r Biocpkg("MSnbase")` package.
+2. The peptide-level quantitation data from the
+   `F063721.dat-mztab.txt` file from the PRIDE ftp site, served as an
+   `MSnSet` object, from the `r Biocpkg("MSnbase")` package.
 
 3. The protein data base, via the `erwinia_carotovora.fasta` file from
 	the PRIDE ftp server, served as a `AAStringSet` object, from the
@@ -83,7 +84,7 @@ experiment are served through `AnnotationHub`.
 
 # Data and metadata
 
-## Annotation {-}
+## Annotation
 
 ### Updates {-}
 
@@ -106,20 +107,21 @@ ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataTags
 
 ### Providers  {-}
 
-A list of predefined/tested providers.
+A list of predefined/tested providers. 
 
 ```{r providers, echo=FALSE}
-ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders
+tab <- do.call(rbind, ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders)
+knitr::kable(tab, row.names = FALSE)
 ```
 
 ### Source types {-}
 
-|---------------|---------|---------|-----------|--------------|--------|
-| SourceType    |  mzML   |   mzTab |   mzid    |      FASTA   | MSnSet |
-| DispatchClass | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
-| RDataClass    | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
+|-------------------|---------|---------|-----------|--------------|--------|
+| **SourceType**    |  mzML   |   mzTab |   mzid    |      FASTA   | MSnSet |
+| **DispatchClass** | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
+| **RDataClass**    | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
 
-## Data location and associated metadata {-}
+## Data location and associated metadata
 
 ### Overview {-}
 
@@ -148,7 +150,7 @@ provider. Multiple scenarios are can occur:
 
 - The `Recipe` is a short function, typically named
   `NameOfDataOrigformatToFinalformat`, that converts the original data
-  into on compatible with `R`/Bioconductor.
+  into on compatible with R/Bioconductor.
 
 - `Location_Prefix` is either `.amazonBaseUrl`, when the file to be
   loaded/read by the user exists on the AH Amazon S3 instance, or
@@ -157,7 +159,7 @@ provider. Multiple scenarios are can occur:
 - `SourceUrl` is the full location of the original file. This is
   generally the third-party server, but not necessarily.
 
-- `RDataPath` is the path and filename of the file to be read into `R`
+- `RDataPath` is the path and filename of the file to be read into R
   and provided to the user. This field does not contain the server
   address `.prideBaseUrl` or `.amazonBaseUrl` (see `Location_Prefix`).
 
@@ -165,9 +167,41 @@ provider. Multiple scenarios are can occur:
   uses a `SourceBaseUrl`, which is the full url minus file name (that
   is in `File`) of the original file. Used to construct `SourceUrl`.
 
-For files that need to be downloaded from a third-party provider such
-as the PRIDE server and then pre-processed, the pre-processed product
-being strored to Amazon s3 machine and the user directly gets the
+
+### Examples {-}
+
+Refering back to the scenarios described above
+
+#### Scenario 1 {-}
+
+Files that are downloaded from the third-party resource, in our case
+PRIDE, and loaded directly into R without any pre-processing:
+
+- the `Recipe` argument **must be** `NA`.
+- the `Location_Prefix` should be the `.prideBaseUrl`.
+- the `RDdataPath` should be `sub(.prideBaseUrl, "", SourceUrl)`
+- the `SourceUrl` should be the actual full url on third-party server.
+
+If the data is pre-processed, a `Recipe` must be provided.
+
+An example from the `PXD000001` data set is the raw `mzML` file, which
+is directly downloaded from the PRIDE server and read into R as an
+`mzRpwiz` object:
+
+```
+SourceType: mzML
+RDataClass: mzRpwiz
+Recipe: NA
+Location_Prefix: ftp://ftp.pride.ebi.ac.uk/
+RDataPath: pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
+SourceUrl: ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
+```
+
+#### Scenario 2 {-}
+
+Files that need to be downloaded from a third-party provider such as
+the PRIDE server, pre-processed and the pre-processed product is
+stored on AnnotationHub Amazon s3 machine. The user directly gets the
 object from Amazon S3 instance:
 
 - the `Recipe` argument **should not be** `NA`.
@@ -178,19 +212,53 @@ object from Amazon S3 instance:
   on the original server.
 - the `SourceUrl` should be the actual url on third-party server.
 
+An example from the `PXD000001` data set is the `fasta` file. It
+originates from the
+[PRIDE ftp server](ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2012/03/PXD000001/),
+but is processed into and `AAStringSet` and stored/server on the
+AnnotationHub Amazon S3 instance.
 
-For files that are downloaded from the third-party resource and loaded
-directly into `R` without any pre-processing:
+```
+SourceType: FASTA
+RDataClass: AAStringSet
+Recipe: ProteomicsAnnotationHubData:::PXD000001FastaToAAStringSet
+Location_Prefix: http://s3.amazonaws.com/annotationhub/
+RDataPath: pride/data/archive/2012/03/PXD000001/erwinia_carotovora.rda
+SourceUrl: ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2012/03/PXD000001/erwinia_carotovora.fasta
+```
 
-- the `Recipe` argument **should be** `NA`.
-- the `Location_Prefix` should be the `.prideBaseUrl`.
-- the `RDdataPath` should be `sub(.prideBaseUrl, "", SourceUrl)`
-- the `SourceUrl` should be the actual url on third-party server.
+Another example is the `mzTab` file with peptide-level quantitation
+data, that is served from the Amazon instance as an `MSnSet` object.
 
-### Location prefix {-}
+```
+SourceType: mzTab
+RDataClass: MSnSet
+Recipe: ProteomicsAnnotationHubData:::PXD000001MzTabToMSnSet
+Location_Prefix: http://s3.amazonaws.com/annotationhub/
+RDataPath: pride/data/archive/2012/03/PXD000001/F063721.dat-MSnSet.rda
+SourceUrl: ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2012/03/PXD000001/F063721.dat-mztab.txt
+```
 
-- `.prideBaseUrl` for files on the PRIDE ftp server.
-- `.amazonBaseUrl` for files on `AnnotationHub` S3 instance.
+#### Scenario 3 {-}
+
+The original data file and the Bioconductor data object are stored on
+the AnnotationHub Amazon S3 instance and directly served to the user
+upon request.
+
+An example from the `PXD000001` data set is the `mzid` file, which is
+not available from the PRIDE ftp server (only a Macot `dat` file is
+provided).
+
+```
+SourceType: mzid
+RDataClass: mzRident
+Recipe: NA
+Location_Prefix: http://s3.amazonaws.com/annotationhub/
+RDataPath: pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid
+SourceUrl: http://s3.amazonaws.com/annotationhub/pride/data/archive/2012/03/PXD000001/
+```
+
+
 
 ### Preparer functions {-}
 
