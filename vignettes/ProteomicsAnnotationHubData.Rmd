@@ -118,20 +118,21 @@ ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders
 
 ### Data location and associated metadata {-}
 
-- The `Recipe` is a short function is a function, typically named
+- The `Recipe` is a short function, typically named
   `NameOfDataOrigformatToFinalformat`, that converts the original data
   into on compatible with `R`/Bioconductor.
 
-- `Location_Prefix` is either `.amazonBaseUrl`, when the file exists
-  on the AH Amazon S3 instance, or `.prideBaseUrl` when on the PRIDE
-  ftp server.
+- `Location_Prefix` is either `.amazonBaseUrl`, when the file to be
+  loaded/read by the user exists on the AH Amazon S3 instance, or
+  `.prideBaseUrl` when it lives on the PRIDE ftp server.
 
-- `SourceURL` is the location of the original file. This is generally
-  the third-party server, but not necessarily.
+- `SourceURL` is the full location of the original file. This is
+  generally the third-party server, but not necessarily.
 
 - `RDataPath` is the path and filename of the file to be read into `R`
   and provided to the user. This field does not contain the server
-  address `.prideBaseUrl` or `.amazonBaseUrl`.
+  address `.prideBaseUrl` or `.amazonBaseUrl` (see
+  (`Location_Prefix`).
 
 - The metadata list, used to create the `AnnotationHubResources` also
   uses a `SourceBaseUrl`, which is the full url minus file name (that
