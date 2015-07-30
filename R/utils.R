@@ -66,8 +66,6 @@ addSourceUrlVersion <- function(x) {
 ##' @param x A list of metadata fields
 ##' @return Ordered list of metadata fields.
 orderMetaDataList <- function(x) {
-    if (is.null(x$RDataPath))
-        addRDataPath(x)
     o <- order(x[["RDataClass"]])
     lapply(x, function(xx) xx[o])
 }
