@@ -262,7 +262,7 @@ RDataClass: mzRident
 Recipe: NA
 Location_Prefix: http://s3.amazonaws.com/annotationhub/
 RDataPath: pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid
-SourceUrl: http://s3.amazonaws.com/annotationhub/pride/data/archive/2012/03/PXD000001/
+SourceUrl: http://s3.amazonaws.com/annotationhub/pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid
 ```
 
 
