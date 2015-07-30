@@ -78,7 +78,6 @@ makeAnnotationHubResource("PXD000001MzTabToMSnSetPreparer", makePXD000001mzTab)
 makeAnnotationHubResource("PXD000001MzidToMzRidentPreparer", makePXD000001mzid)
 makeAnnotationHubResource("PXD000001MzMLToMzRPwizPreparer", makePXD000001mzML)
 
-## Preparer function
 PXD000001MzTabToMSnSet <- function(ahm) {
     ## Imports: MSnbase
     if (file.exists(outputFile(ahm)))

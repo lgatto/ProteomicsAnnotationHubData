@@ -7,7 +7,7 @@
 ProteomicsAnnotationHubData()
 }
 \value{
-Used for its side-effect of open the package vignette.
+Used for its side-effect of opening the package vignette.
 }
 \description{
 Read the \code{ProteomicsAnnotationHubData} vignette to get
