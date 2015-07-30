@@ -55,6 +55,13 @@ addSourceUrlVersion <- function(x) {
                   url = x$FullUrl,
                   filename = x$File,
                   tag = NA_character_)
+    ## .ftpFileInfo does not work for files on AHS3. See
+    ## https://github.com/lgatto/ProteomicsAnnotationHubData/issues/8
+    ## for details. We need to set the SourceUrl manually.
+    if (any(i <- x$SourceBaseUrl == .amazonBaseUrl)) {
+        for (ii in which(i))
+            flInfo[[ii]]$fileurl <- paste0(x$FullUrl[ii], x$File[[ii]])
+    }
     flInfo <- do.call(rbind, flInfo)
     flInfo$date <- as.character(flInfo$date)
     x$SourceUrl <- flInfo[, 1]
