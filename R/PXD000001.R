@@ -97,7 +97,7 @@ PXD000001FastaToAAStringSet <- function(ahm) {
     fin <- inputFiles(ahm) ## get file name on the ftp site
     fout <- outputFile(ahm)
     fl <- download.file(fin, fout)
-    msnset <- Biostrings::readAAStringSet(fin)
-    save(msnset, file = "erwinia_carotovora.rda")
+    fas <- Biostrings::readAAStringSet(fin)
+    save(fas, file = "erwinia_carotovora.rda")
     outputFile(ahm)
 }
