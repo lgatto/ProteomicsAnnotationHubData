@@ -11,4 +11,5 @@ importFrom("BiocInstaller", "biocVersion")
 importFrom("utils",
            "packageDescription", "vignette", "download.file")
 
-export(ProteomicsAnnotationHubData)
+export(ProteomicsAnnotationHubData,
+       availableProteomicsAnnotationHubData)

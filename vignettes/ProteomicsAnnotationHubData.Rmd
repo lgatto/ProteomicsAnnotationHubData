@@ -48,6 +48,10 @@ vignettes for a description on how to use it.
 
 # Available datasets
 
+```{r}
+availableProteomicsAnnotationHubData
+```
+
 ## PXD000001
 
 Description
@@ -95,6 +99,18 @@ a
 [github issue](https://github.com/lgatto/ProteomicsAnnotationHubData/issues).
 Contributions can also be made to the
 [package github repository](https://github.com/lgatto/ProteomicsAnnotationHubData).
+
+### Title {-}
+
+The title of a file should always be prefixed with its experiment
+identifier, such as
+
+```
+PXD000001: Erwinia carotovora and spiked-in protein fasta file
+```
+```
+PXD000001: Peptide-level quantitation data
+```
 
 ### Tags {-}
 
