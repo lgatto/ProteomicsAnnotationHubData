@@ -16,6 +16,12 @@ vignette: >
 BiocStyle::markdown()
 ```
 
+```{r}
+suppressPackageStartupMessages(library("AnnotationHub"))
+suppressPackageStartupMessages(library("ProteomicsAnnotationHubData"))
+suppressPackageStartupMessages(library("mzR"))
+```
+
 **Package**: `r Biocpkg("ProteomicsAnnotationHubData")`<br />
 **Authors**: `r packageDescription("ProteomicsAnnotationHubData")[["Author"]] `<br />
 **Modified:** `r file.info("ProteomicsAnnotationHubData.Rmd")$mtime`<br />
@@ -44,7 +50,7 @@ and
 [Access the AnnotationHub Web Service](http://bioconductor.org/packages/devel/bioc/vignettes/AnnotationHub/inst/doc/AnnotationHub.html)
 vignettes for a description on how to use it.
 
-## Accessing proteomics data through `AnnotationHub` {-}
+## Accessing proteomics data {-}
 
 ```{r}
 library("AnnotationHub")
