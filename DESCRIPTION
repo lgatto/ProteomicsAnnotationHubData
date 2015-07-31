@@ -10,9 +10,9 @@ Description: These recipes convert a variety and a growing number of
              public proteomics data sets into easily-used standard
              Bioconductor data structures.
 Depends: AnnotationHub (>= 2.1.32), AnnotationHubData
-Imports: mzR, MSnbase, Biostrings, GenomeInfoDb, utils, Biobase,
+Imports: mzR (>= 2.3.2), MSnbase, Biostrings, GenomeInfoDb, utils, Biobase,
          BiocInstaller
-Suggests: knitr, BiocStyle, rmarkdown, testthat, mzR (>= 2.3.2)
+Suggests: knitr, BiocStyle, rmarkdown, testthat
 biocViews: DataImport, Proteomics
 VignetteBuilder: knitr
 License: Artistic-2.0
