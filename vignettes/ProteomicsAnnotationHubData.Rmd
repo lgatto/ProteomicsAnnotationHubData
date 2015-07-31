@@ -44,7 +44,11 @@ and
 [Access the AnnotationHub Web Service](http://bioconductor.org/packages/devel/bioc/vignettes/AnnotationHub/inst/doc/AnnotationHub.html)
 vignettes for a description on how to use it.
 
-**TODO**: add example code for proteomics once the first data is available.
+## Accessing proteomics data through `AnnotationHub`
+
+```{r}
+library("AnnotationHub")
+```
 
 # Available datasets
 
