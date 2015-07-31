@@ -48,6 +48,43 @@ vignettes for a description on how to use it.
 
 ```{r}
 library("AnnotationHub")
+ah <- AnnotationHub()
+ah
+```
+
+We can extract the entries that originate from the PRIDE database:
+
+```{r}
+ah[ah$dataprovider == "PRIDE"]
+```
+
+Or those of a specific project
+
+```{r}
+ah[grep("PXD000001", ah$title)]
+```
+
+To see the metadata of a specific entry, we use its AnnotationHub
+entry number inside single `[`
+
+```{r}
+ah["AH49008"]
+```
+
+To access the actual data, raw mass spectrometry data in this case, we
+double the `[[`
+
+```{r}
+library("mzR")
+rw <- ah[["AH49008"]]
+rw
+```
+
+In this case, we have an instance of class `r as.character(class(rw))`,
+that can be processed as anticipated
+
+```{r}
+plot(peaks(rw, 1), type = "h", xlab = "M/Z", ylab = "Intensity")
 ```
 
 # Available datasets
