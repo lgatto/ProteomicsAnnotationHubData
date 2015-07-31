@@ -12,7 +12,7 @@ Description: These recipes convert a variety and a growing number of
 Depends: AnnotationHub, AnnotationHubData
 Imports: mzR, MSnbase, Biostrings, GenomeInfoDb, utils, Biobase,
          BiocInstaller
-Suggests: knitr, BiocStyle, rmarkdown
+Suggests: knitr, BiocStyle, rmarkdown, testthat
 biocViews: DataImport, Proteomics
 VignetteBuilder: knitr
 License: Artistic-2.0
