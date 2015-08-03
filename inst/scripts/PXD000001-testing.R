@@ -1,11 +1,7 @@
 library("AnnotationHubData")
 library("ProteomicsAnnotationHubData")
 
-ahroot <- "/var/FastRWeb/web"
-BiocVersion <- c("3.2") ## as.character(BiocInstaller:::biocVersion())
 insertFlag <- FALSE
-
-
 ## metadataOnly should be FALSE, when saving the Rda file on amazon S3
 mdonly <- TRUE
 
