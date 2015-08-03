@@ -16,3 +16,6 @@ ProteomicsAnnotationHubData <- function()
 ##' @rdname ProteomicsAnnotationHubData
 availableProteomicsAnnotationHubData <-
     c("PXD000001")
+
+ahroot <- "/var/FastRWeb/web"
+BiocVersion <- as.character(BiocInstaller:::biocVersion()) ## "3.2"
