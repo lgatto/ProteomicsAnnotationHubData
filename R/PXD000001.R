@@ -101,3 +101,29 @@ PXD000001FastaToAAStringSet <- function(ahm) {
     save(fas, file = "erwinia_carotovora.rda")
     outputFile(ahm)
 }
+
+## library("ProteomicsAnnotationHubData")
+
+insertFlag <- FALSE
+## metadataOnly should be FALSE, when saving the Rda file on amazon S3
+mdonly <- TRUE
+
+PXD000001Fasta <-
+    AnnotationHubData::updateResources(ahroot, BiocVersion,insert = insertFlag, 
+                                       preparerClasses = "PXD000001FastaToAAStringSetPreparer",
+                                       metadataOnly = mdonly , justRunUnitTest = FALSE)
+
+PXD000001MSnSet <-
+    AnnotationHubData::updateResources(ahroot, BiocVersion, insert = insertFlag ,
+                                       preparerClasses = "PXD000001MzTabToMSnSetPreparer",
+                                       metadataOnly = mdonly , justRunUnitTest = FALSE)
+
+PXD000001MzML <-
+    AnnotationHubData::updateResources(ahroot, BiocVersion, insert = insertFlag,
+                                       preparerClasses = "PXD000001MzMLToMzRPwizPreparer",
+                                       metadataOnly = mdonly , justRunUnitTest=FALSE)
+
+PXD000001MzID <-
+    AnnotationHubData::updateResources(ahroot, BiocVersion,insert = insertFlag ,
+                                       preparerClasses = "PXD000001MzidToMzRidentPreparer",
+                                       metadataOnly = mdonly , justRunUnitTest = FALSE)
