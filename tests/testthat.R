@@ -3,6 +3,6 @@
 # revert this when that issue in R is fixed.
 Sys.setenv("R_TESTS" = "")
 library(testthat)
-library(ProteomicsAnnotationHub)
+library(ProteomicsAnnotationHubData)
 
-test_check("ProteomicsAnnotationHub")
+test_check("ProteomicsAnnotationHubData")
