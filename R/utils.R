@@ -116,3 +116,53 @@ makeAnnotationHubMetadata <- function(x,
     }
     ans
 }
+
+##' @title Are the remote and local instances identical
+##' @param rem An instance of class \code{AnnotationHub}
+##' @param loc An instance of class \code{AnnotationHubMetadata}
+##' @return A \code{logical}
+identicalRemLoc <- function(rem, loc) {
+    res <- TRUE
+    if (!identical(rem$dataprovider, loc@DataProvider)) {
+        warning("DataProviders are not identical", call. = FALSE)
+        res <- FALSE
+    }
+    if (!identical(rem$description, loc@Description)) {
+        warning("Descriptions are not identical", call. = FALSE)
+        res <- FALSE
+    }
+    if (!identical(rem$genome, loc@Genome)) {
+        warning("Genomes are not identical", call. = FALSE)
+        res <- FALSE
+    }
+    if (!identical(rem$rdataclass, loc@RDataClass)) {
+        warning("DataClasses are not identical", call. = FALSE)
+        res <- FALSE
+    }
+    if (!identical(rem$sourcetype, loc@SourceType)) {
+        warning("SourceTypes are not identical", call. = FALSE)
+        res <- FALSE
+    }
+    if (!identical(rem$sourceurl, loc@SourceUrl)) {        
+        warning("SourceUrls are not identical", call. = FALSE)
+        res <- FALSE
+    }
+    if (!identical(rem$species, loc@Species)) {
+        warning("Species are not identical", call. = FALSE)
+        res <- FALSE
+    }
+    loctags <- paste(loc@Tags, collapse = ", ")
+    if (!identical(rem$tags, loctags)) {        
+        warning("Tags are not identical", call. = FALSE)
+        res <- FALSE
+    }
+    if (!identical(rem$taxonomyid, loc@TaxonomyId)) {
+        warning("TaxonomyIds are not identical", call. = FALSE)
+        res <- FALSE
+    }
+    if (!identical(rem$title, loc@Title)) {
+        warning("Titles are not identical", call. = FALSE)
+        res <- FALSE
+    }
+    res
+}
