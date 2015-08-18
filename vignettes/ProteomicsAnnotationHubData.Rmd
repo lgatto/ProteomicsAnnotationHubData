@@ -16,7 +16,7 @@ vignette: >
 BiocStyle::markdown()
 ```
 
-```{r}
+```{r env, echo=FALSE}
 suppressPackageStartupMessages(library("AnnotationHub"))
 suppressPackageStartupMessages(library("ProteomicsAnnotationHubData"))
 suppressPackageStartupMessages(library("mzR"))
@@ -93,7 +93,19 @@ that can be processed as anticipated
 plot(peaks(rw, 1), type = "h", xlab = "M/Z", ylab = "Intensity")
 ```
 
+In the short demonstration above, we had **direct** and
+**standardised** access to the raw data, without a need to manually
+open this raw data or worry about the file format. The data was
+prepared and converted into a **standard Bioconductor data types** for
+immediate consumption by the user. This is also valid for other
+relevant data types such as identification results, fasta files or
+protein of peptide quantitation data.
+
 # Available datasets
+
+To list all available proteomics datasets, one can query
+`AnnotationHub`, as described above, or using the following variable
+defined in the `ProteomicsAnnotationHubData` package:
 
 ```{r}
 library("ProteomicsAnnotationHubData")
@@ -329,9 +341,29 @@ RDataPath: pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_iso
 SourceUrl: http://s3.amazonaws.com/annotationhub/pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid
 ```
 
-
-
 ### Preparer functions {-}
 
 Preparer functions and recipes are only required if the `rda` file is
 prepared on the `AnnotationHub` Amazon S3 instance.
+
+## Testing
+
+### Generic tests {-}
+
+**TODO**, when generating the AH data
+
+- Check that `SourceType`, `DispatchClass` and `RDataClass` match.
+- Checking file types that have a base URL on amazon or PRIDE.
+
+### Experiment/data unit tests {-}
+
+When new data/experiments or even file types are added, the procedure
+to add new `AnnotationHub` items will be streamlined, revised,
+simplified and hopefully automated. To make sure that any of these
+updates do not alter the format/annotation, a set of
+experiment-specific unit tests are set up, that compare the metadata
+created in this package and the metadata extracted from
+`AnnotationHub`.
+
+
+See for example `./tests/testthat/test_PXD000001.R`.
