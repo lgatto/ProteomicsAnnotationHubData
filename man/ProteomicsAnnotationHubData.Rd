@@ -23,7 +23,7 @@ new recipes. Use \code{availableProteomicsAnnotationHubData()} to
 get a vector of available experiments.
 }
 \examples{
-availableProteomicsAnnotationHubData()
+availableProteomicsAnnotationHubData
 }
 \author{
 Laurent Gatto
