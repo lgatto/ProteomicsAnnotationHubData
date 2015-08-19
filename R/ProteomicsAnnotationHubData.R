@@ -8,7 +8,7 @@
 ##'     vignette. A vector of experiment identifiers.
 ##' @author Laurent Gatto
 ##' @aliases availableProteomicsAnnotationHubData
-##' @examples availableProteomicsAnnotationHubData()
+##' @examples availableProteomicsAnnotationHubData
 ProteomicsAnnotationHubData <- function() 
     vignette("ProteomicsAnnotationHubData",
              package = "ProteomicsAnnotationHubData")
