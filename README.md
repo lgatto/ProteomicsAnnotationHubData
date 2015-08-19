@@ -1,16 +1,14 @@
 ---
-title: `AnnotationHub` for proteomics
 output:
   md_document:
     variant: markdown_github
 ---
 
+# `AnnotationHub` for proteomics
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
-```
-## Warning: package 'BiocStyle' was built under R version 3.3.0
-```
 
 The aim of this package is to offer access to mass spectrometry and
 proteomics data throught the *[AnnotationHub](http://bioconductor.org/packages/release/bioc/html/AnnotationHub.html)*
@@ -119,9 +117,6 @@ double the `[[`
 
 ```r
 library("mzR")
-#> Warning: package 'mzR' was built under R version 3.3.0
-#> Loading required package: Rcpp
-#> Warning: package 'Rcpp' was built under R version 3.3.0
 rw <- ah[["AH49008"]]
 rw
 #> Mass Spectrometry file handle.
