@@ -52,7 +52,7 @@ vignettes for a description on how to use it.
 
 ## Accessing proteomics data {-}
 
-```{r}
+```{r ahinit}
 library("AnnotationHub")
 ah <- AnnotationHub()
 ah
@@ -60,27 +60,27 @@ ah
 
 We can extract the entries that originate from the PRIDE database:
 
-```{r}
+```{r provider}
 ah[ah$dataprovider == "PRIDE"]
 ```
 
 Or those of a specific project
 
-```{r}
+```{r title}
 ah[grep("PXD000001", ah$title)]
 ```
 
 To see the metadata of a specific entry, we use its AnnotationHub
 entry number inside single `[`
 
-```{r}
+```{r ah49008}
 ah["AH49008"]
 ```
 
 To access the actual data, raw mass spectrometry data in this case, we
 double the `[[`
 
-```{r}
+```{r rawmsdata}
 library("mzR")
 rw <- ah[["AH49008"]]
 rw
@@ -89,7 +89,7 @@ rw
 In this case, we have an instance of class `r as.character(class(rw))`,
 that can be processed as anticipated
 
-```{r}
+```{r msdataplot}
 plot(peaks(rw, 1), type = "h", xlab = "M/Z", ylab = "Intensity")
 ```
 
@@ -107,7 +107,7 @@ To list all available proteomics datasets, one can query
 `AnnotationHub`, as described above, or using the following variable
 defined in the `ProteomicsAnnotationHubData` package:
 
-```{r}
+```{r availablepahd}
 library("ProteomicsAnnotationHubData")
 availableProteomicsAnnotationHubData
 ```
@@ -212,7 +212,7 @@ AnnotationHub Amazon S3 instance and the original data
 provider. Multiple scenarios are can occur:
 
 1. The data originates from the provider's public repository. It is
-   directly server to the user, from that third-party server, with
+   directly served to the user, from that third-party server, with
    possible local processing/coercion and made accessible as a
    Bioconductor data object.
 
@@ -222,8 +222,8 @@ provider. Multiple scenarios are can occur:
    therefor copied, processed and stored on the AnnotationHub Amazon
    S3 instance and server from there upon request.
 
-3. The original file is not available from a data provider, is stored
-   on the AnnotationHub Amazon S3 instance and, possibly
+3. The original file is not available from a data provider, and is
+   stored on the AnnotationHub Amazon S3 instance and, possibly
    pre-processed. Upon request, it is served to the user.
 
 ### Definitions {-}
@@ -352,12 +352,12 @@ prepared on the `AnnotationHub` Amazon S3 instance.
 
 ## Testing
 
-### Generic tests {-}
+<!-- ### Generic tests {-} -->
 
-**TODO**, when generating the AH data
+<!-- **TODO**, when generating the AH data -->
 
-- Check that `SourceType`, `DispatchClass` and `RDataClass` match.
-- Checking file types that have a base URL on amazon or PRIDE.
+<!-- - Check that `SourceType`, `DispatchClass` and `RDataClass` match. -->
+<!-- - Checking file types that have a base URL on amazon or PRIDE. -->
 
 ### Experiment/data unit tests {-}
 
