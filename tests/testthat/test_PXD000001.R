@@ -1,5 +1,7 @@
 context("Testing PXD000001 metadata")
 
+ah <- AnnotationHub::AnnotationHub()
+
 test_that("PXD000001Fasta", {
     loc <- ProteomicsAnnotationHubData:::PXD000001Fasta[[1]]
     rem <- ah["AH49006"]
