@@ -148,6 +148,10 @@ experiment are served through `AnnotationHub`.
 
 # Data and metadata
 
+This section describes how `ProteomicsAnnotationHubData` are described
+and generated. See also the `r Biocpkg("AnnotationHub")` package for
+additional documentation.
+
 ## Annotation
 
 ### Updates {-}
