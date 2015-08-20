@@ -23,7 +23,7 @@ suppressPackageStartupMessages(library("mzR"))
 ```
 
 **Package**: `r Biocpkg("ProteomicsAnnotationHubData")`<br />
-**Authors**: `r packageDescription("ProteomicsAnnotationHubData")[["Author"]] `<br />
+**Authors**: `r packageDescription("ProteomicsAnnotationHubData")[["Author"]]`<br />
 **Modified:** `r file.info("ProteomicsAnnotationHubData.Rmd")$mtime`<br />
 **Compiled**: `r date()`
 

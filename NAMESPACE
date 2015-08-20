@@ -8,8 +8,8 @@ import("GenomeInfoDb")
 importFrom("Biobase", "addVigs2WinMenu")
 importFrom("BiocInstaller", "biocVersion")
 
-importFrom("utils",
-           "packageDescription", "vignette", "download.file")
+importFrom("utils", "packageVersion", "packageDescription",
+           "vignette", "download.file")
 
 export(ProteomicsAnnotationHubData,
        availableProteomicsAnnotationHubData)
