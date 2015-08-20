@@ -127,11 +127,7 @@ identicalRemLoc <- function(rem, loc) {
         warning("DataProviders are not identical", call. = FALSE)
         res <- FALSE
     }
-    ## The field is currently stored as a char(255) in the SQLite
-    ## database (see issue #10), thus temporarily limiting the
-    ## comparison    
-    ## if (!identical(rem$description, loc@Description)) {
-    if (!identical(rem$description, strtrim(loc@Description, 255))) {
+    if (!identical(rem$description, loc@Description)) {
         warning("Descriptions are not identical", call. = FALSE)
         res <- FALSE
     }
