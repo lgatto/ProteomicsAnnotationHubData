@@ -5,7 +5,7 @@ AnnotationHubMetadata <- AnnotationHubData:::AnnotationHubMetadata
 
 .prideBaseUrl <- "ftp://ftp.pride.ebi.ac.uk/"
 
-.ftpFileInfo <- function(...) {
+.ftpFileInfo2 <- function(...) {
     flInfo <- AnnotationHubData:::.ftpFileInfo(...)
     if (is.na(flInfo$date)) flInfo$date <- Sys.time()
     flInfo
@@ -51,7 +51,7 @@ fixMetaDataList <- function(x, n) {
 ##' @return Update list of metadat fields
 addSourceUrlVersion <- function(x) {
     x$FullUrl <- paste0(x$SourceBaseUrl, .prideDir)
-    flInfo <- Map(ProteomicsAnnotationHubData:::.ftpFileInfo,
+    flInfo <- Map(.ftpFileInfo2,
                   url = x$FullUrl,
                   filename = x$File,
                   tag = NA_character_)
