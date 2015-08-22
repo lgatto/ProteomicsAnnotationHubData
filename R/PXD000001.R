@@ -109,7 +109,7 @@ insertFlag <- FALSE
 mdonly <- TRUE
 
 PXD000001Fasta <-
-    AnnotationHubData::updateResources(ahroot, BiocVersion,insert = insertFlag, 
+    AnnotationHubData::updateResources(ahroot, BiocVersion, insert = insertFlag, 
                                        preparerClasses = "PXD000001FastaToAAStringSetPreparer",
                                        metadataOnly = mdonly , justRunUnitTest = FALSE)
 
@@ -124,6 +124,6 @@ PXD000001MzML <-
                                        metadataOnly = mdonly , justRunUnitTest=FALSE)
 
 PXD000001MzID <-
-    AnnotationHubData::updateResources(ahroot, BiocVersion,insert = insertFlag ,
+    AnnotationHubData::updateResources(ahroot, BiocVersion, insert = insertFlag ,
                                        preparerClasses = "PXD000001MzidToMzRidentPreparer",
                                        metadataOnly = mdonly , justRunUnitTest = FALSE)
