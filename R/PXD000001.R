@@ -64,14 +64,18 @@ PXD000001 <- addSourceUrlVersion(PXD000001)
 PXD000001 <- orderMetaDataList(PXD000001)
 checkMetaDataList(PXD000001, n)
 
-makePXD000001fasta <- function(currentMetadata, justRunUnitTest = FALSE) 
-    makeAnnotationHubMetadata(PXD000001, resource = "FASTA")
-makePXD000001mzTab <- function(currentMetadata, justRunUnitTest = FALSE)
-    makeAnnotationHubMetadata(PXD000001, resource = "mzTab")
-makePXD000001mzid <- function(currentMetadata, justRunUnitTest = FALSE)
-    makeAnnotationHubMetadata(PXD000001, resource = "mzid")
-makePXD000001mzML <- function(currentMetadata, justRunUnitTest = FALSE)
-    makeAnnotationHubMetadata(PXD000001, resource = "mzML")
+makePXD000001fasta <-
+    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=biocVersion())
+        makeAnnotationHubMetadata(PXD000001, resource = "FASTA")
+makePXD000001mzTab <-
+    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=biocVersion())
+        makeAnnotationHubMetadata(PXD000001, resource = "mzTab")
+makePXD000001mzid <-
+    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=biocVersion())
+        makeAnnotationHubMetadata(PXD000001, resource = "mzid")
+makePXD000001mzML <-
+    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=biocVersion())
+        makeAnnotationHubMetadata(PXD000001, resource = "mzML")
 
 makeAnnotationHubResource("PXD000001FastaToAAStringSetPreparer", makePXD000001fasta)
 makeAnnotationHubResource("PXD000001MzTabToMSnSetPreparer", makePXD000001mzTab)
@@ -109,21 +113,21 @@ insertFlag <- FALSE
 mdonly <- TRUE
 
 PXD000001Fasta <-
-    AnnotationHubData::updateResources(ahroot, BiocVersion, insert = insertFlag, 
+    AnnotationHubData::updateResources(ahroot, insert = insertFlag, 
                                        preparerClasses = "PXD000001FastaToAAStringSetPreparer",
                                        metadataOnly = mdonly , justRunUnitTest = FALSE)
 
 PXD000001MSnSet <-
-    AnnotationHubData::updateResources(ahroot, BiocVersion, insert = insertFlag ,
+    AnnotationHubData::updateResources(ahroot, insert = insertFlag,
                                        preparerClasses = "PXD000001MzTabToMSnSetPreparer",
                                        metadataOnly = mdonly , justRunUnitTest = FALSE)
 
 PXD000001MzML <-
-    AnnotationHubData::updateResources(ahroot, BiocVersion, insert = insertFlag,
+    AnnotationHubData::updateResources(ahroot, insert = insertFlag,
                                        preparerClasses = "PXD000001MzMLToMzRPwizPreparer",
                                        metadataOnly = mdonly , justRunUnitTest=FALSE)
 
 PXD000001MzID <-
-    AnnotationHubData::updateResources(ahroot, BiocVersion, insert = insertFlag ,
+    AnnotationHubData::updateResources(ahroot, insert = insertFlag,
                                        preparerClasses = "PXD000001MzidToMzRidentPreparer",
                                        metadataOnly = mdonly , justRunUnitTest = FALSE)
