@@ -16,7 +16,7 @@ vignette: >
 BiocStyle::markdown()
 ```
 
-```{r env, echo=FALSE}
+```{r env, echo=FALSE, message=FALSE}
 suppressPackageStartupMessages(library("AnnotationHub"))
 suppressPackageStartupMessages(library("ProteomicsAnnotationHubData"))
 suppressPackageStartupMessages(library("mzR"))
