@@ -1,6 +1,12 @@
-CHANGES IN VERSION 0.99.0
+CHANGES IN VERSION 0.99.2
+-------------------------
+ o Use AnnotationHub::query() instead of manual subsetting
+   <2015-09-02 Wed>
+
+CHANGES IN VERSION 0.99.1
 -------------------------
  o Submission of Bioc (Issue 1292) <2015-08-25 Tue>
+ 
 CHANGES IN VERSION 0.99.0
 -------------------------
  o  First release with data PXD000001

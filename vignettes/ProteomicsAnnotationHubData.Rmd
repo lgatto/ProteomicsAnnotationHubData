@@ -61,13 +61,13 @@ ah
 We can extract the entries that originate from the PRIDE database:
 
 ```{r provider}
-ah[ah$dataprovider == "PRIDE"]
+query(ah, "PRIDE")
 ```
 
 Or those of a specific project
 
 ```{r title}
-ah[grep("PXD000001", ah$title)]
+query(ah, "PXD000001")
 ```
 
 To see the metadata of a specific entry, we use its AnnotationHub
