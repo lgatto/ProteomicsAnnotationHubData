@@ -1,0 +1,15 @@
+import("AnnotationHub")
+import("AnnotationHubData")
+import("MSnbase")
+import("mzR")
+import("Biostrings")
+import("GenomeInfoDb")
+
+importFrom("Biobase", "addVigs2WinMenu")
+importFrom("BiocInstaller", "biocVersion")
+
+importFrom("utils", "packageVersion", "packageDescription",
+           "vignette", "download.file")
+
+export(ProteomicsAnnotationHubData,
+       availableProteomicsAnnotationHubData)
