@@ -1,0 +1,373 @@
+---
+title: "Proteomics Data in Annotation Hub"
+output:
+  BiocStyle::html_document:
+     toc: false
+     toc_depth: 1
+vignette: >
+  % \VignetteIndexEntry{Proteomics Data in Annotation Hub}
+  % \VignetteEngine{knitr::rmarkdown}
+  % \VignetteKeyword{proteomics, mass spectrometry, data}
+  % \VignettePackage{ProteomicsAnnotationHubData}
+---
+
+
+```{r style, echo = FALSE, results = 'asis', message=FALSE}
+BiocStyle::markdown()
+```
+
+```{r env, echo=FALSE, message=FALSE}
+suppressPackageStartupMessages(library("AnnotationHub"))
+suppressPackageStartupMessages(library("ProteomicsAnnotationHubData"))
+suppressPackageStartupMessages(library("mzR"))
+```
+
+**Package**: `r Biocpkg("ProteomicsAnnotationHubData")`<br />
+**Authors**: `r packageDescription("ProteomicsAnnotationHubData")[["Author"]]`<br />
+**Modified:** `r file.info("ProteomicsAnnotationHubData.Rmd")$mtime`<br />
+**Compiled**: `r date()`
+
+# Introduction
+
+About `r Biocpkg("AnnotationHub")`:
+
+> This package provides a client for the Bioconductor AnnotationHub
+> web resource. The AnnotationHub web resource provides a central
+> location where genomic files (e.g., VCF, bed, wig) and other
+> resources from standard locations (e.g., UCSC, Ensembl) can be
+> discovered. The resource includes metadata about each resource,
+> e.g., a textual description, tags, and date of modification. The
+> client creates and manages a local cache of files retrieved by the
+> user, helping with quick and reproducible access.
+
+The goal of this project is to expand this functionality to mass
+spectrometry and proteomics.
+
+
+See the `AnnotationHub`'s
+[How-To's](http://bioconductor.org/packages/devel/bioc/vignettes/AnnotationHub/inst/doc/AnnotationHub-HOWTO.html)
+and
+[Access the AnnotationHub Web Service](http://bioconductor.org/packages/devel/bioc/vignettes/AnnotationHub/inst/doc/AnnotationHub.html)
+vignettes for a description on how to use it.
+
+## Accessing proteomics data {-}
+
+```{r ahinit}
+library("AnnotationHub")
+ah <- AnnotationHub()
+ah
+```
+
+We can extract the entries that originate from the PRIDE database:
+
+```{r provider}
+query(ah, "PRIDE")
+```
+
+Or those of a specific project
+
+```{r title}
+query(ah, "PXD000001")
+```
+
+To see the metadata of a specific entry, we use its AnnotationHub
+entry number inside single `[`
+
+```{r ah49008}
+ah["AH49008"]
+```
+
+To access the actual data, raw mass spectrometry data in this case, we
+double the `[[`
+
+```{r rawmsdata}
+library("mzR")
+rw <- ah[["AH49008"]]
+rw
+```
+
+In this case, we have an instance of class `r as.character(class(rw))`,
+that can be processed as anticipated
+
+```{r msdataplot}
+plot(peaks(rw, 1), type = "h", xlab = "M/Z", ylab = "Intensity")
+```
+
+In the short demonstration above, we had **direct** and
+**standardised** access to the raw data, without a need to manually
+open this raw data or worry about the file format. The data was
+prepared and converted into a **standard Bioconductor data types** for
+immediate consumption by the user. This is also valid for other
+relevant data types such as identification results, fasta files or
+protein of peptide quantitation data.
+
+# Available datasets
+
+To list all available proteomics datasets, one can query
+`AnnotationHub`, as described above, or using the following variable
+defined in the `ProteomicsAnnotationHubData` package:
+
+```{r availablepahd}
+library("ProteomicsAnnotationHubData")
+availableProteomicsAnnotationHubData
+```
+
+## PXD000001
+
+Description
+
+> Four human TMT spliked-in proteins in an Erwinia carotovora
+> background. Expected reporter ion ratios: Erwinia peptides:
+> 1:1:1:1:1:1; Enolase spike (sp|P00924|ENO1_YEAST):
+> 10:5:2.5:1:2.5:10; BSA spike (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1;
+> PhosB spike (sp|P00489|PYGM_RABIT): 2:2:2:2:1:1; Cytochrome C spike
+> (sp|P62894|CYC_BOVIN): 1:1:1:1:1:2.
+
+
+Four data files from the PRIDE
+[PXD000001](http://www.ebi.ac.uk/pride/archive/projects/PXD000001)
+experiment are served through `AnnotationHub`.
+
+1. The raw mass spectrometry data from the
+   `TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML`
+   file from the PRDIE ftp site, served as an `mzRpwiz` object, from
+   the `r Biocpkg("mzR")` package.
+
+2. The peptide-level quantitation data from the
+   `F063721.dat-mztab.txt` file from the PRIDE ftp site, served as an
+   `MSnSet` object, from the `r Biocpkg("MSnbase")` package.
+
+3. The protein data base, via the `erwinia_carotovora.fasta` file from
+	the PRIDE ftp server, served as a `AAStringSet` object, from the
+	`r Biocpkg("Biostrings")` package.
+
+4. The identification results, produced using the `MSGF+` search
+   engine, served as a `mzRident` object, from the `r Biocpkg("mzR")`
+   package.
+
+
+# Data and metadata
+
+This section describes how `ProteomicsAnnotationHubData` are described
+and generated. See also the `r Biocpkg("AnnotationHub")` package for
+additional documentation.
+
+## Annotation
+
+### Updates {-}
+
+To suggest updates and/or new mass spectrometry and/or proteomics
+data, please post your suggestions/request on the
+[Bioconductor support site](https://support.bioconductor.org/) or open
+a
+[github issue](https://github.com/lgatto/ProteomicsAnnotationHubData/issues).
+Contributions can also be made to the
+[package github repository](https://github.com/lgatto/ProteomicsAnnotationHubData).
+
+### Title {-}
+
+The title of a file should always be prefixed with its experiment
+identifier, such as
+
+```
+PXD000001: Erwinia carotovora and spiked-in protein fasta file
+```
+```
+PXD000001: Peptide-level quantitation data
+```
+
+### Tags {-}
+
+A list of suggested tags is shown below. These suggestions will be
+updated and completed over time.
+
+```{r tags, echo=FALSE}
+ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataTags
+```
+
+### Providers  {-}
+
+A list of predefined/tested providers. 
+
+```{r providers, echo=FALSE}
+tab <- do.call(rbind, ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders)
+knitr::kable(tab, row.names = FALSE)
+```
+
+### Source types {-}
+
+|-------------------|---------|---------|-----------|--------------|--------|
+| **SourceType**    |  mzML   |   mzTab |   mzid    |      FASTA   | MSnSet |
+| **DispatchClass** | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
+| **RDataClass**    | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
+
+## Data location and associated metadata
+
+### Overview {-}
+
+The data accessed through the `r Biocpkg("AnnotationHub")`
+infrastructure exists, in different forms, in different
+locations. These locations can be the user's computer, the
+AnnotationHub Amazon S3 instance and the original data
+provider. Multiple scenarios are can occur:
+
+1. The data originates from the provider's public repository. It is
+   directly served to the user, from that third-party server, with
+   possible local processing/coercion and made accessible as a
+   Bioconductor data object.
+
+2. The data originates from the provider's public repository. However,
+   conversion to a Bioconductor data object is time-consuming or it is
+   anticipated that this would be repeated many times. The data is
+   therefor copied, processed and stored on the AnnotationHub Amazon
+   S3 instance and server from there upon request.
+
+3. The original file is not available from a data provider, and is
+   stored on the AnnotationHub Amazon S3 instance and, possibly
+   pre-processed. Upon request, it is served to the user.
+
+### Definitions {-}
+
+- The `Recipe` is a short function, typically named
+  `NameOfDataOrigformatToFinalformat`, that generally converts the
+  original data into on compatible with R/Bioconductor or enable to
+  read the data directly using a special data accessor.
+
+    For example, for some `fasta` files, the recipe function uses the
+    `Rsamtools::indexFa` function to create an index file without
+    converting the original file. Similarly, raw mass-spectrometry
+    files are not converted into objects *per se*, but an accessor
+    object is produced to extract data directly from the data file.
+
+- `Location_Prefix` is either `.amazonBaseUrl`, when the file to be
+  loaded/read by the user exists on the AH Amazon S3 instance, or
+  `.prideBaseUrl` when it lives on the PRIDE ftp server.
+
+- `SourceUrl` is the full location of the original file. This is
+  generally the third-party server, but not necessarily.
+
+- `RDataPath` is the path and filename of the file to be read into R
+  and provided to the user. This field does not contain the server
+  address `.prideBaseUrl` or `.amazonBaseUrl` (see `Location_Prefix`).
+
+- The metadata list, used to create the `AnnotationHubResources` also
+  uses a `SourceBaseUrl`, which is the full url minus file name (that
+  is in `File`) of the original file. Used to construct `SourceUrl`.
+
+
+### Examples {-}
+
+Refering back to the scenarios described above
+
+#### Scenario 1 {-}
+
+Files that are downloaded from the third-party resource, in our case
+PRIDE, and loaded directly into R without any pre-processing:
+
+- the `Recipe` argument **must be** `NA`.
+- the `Location_Prefix` should be the `.prideBaseUrl`.
+- the `RDdataPath` should be `sub(.prideBaseUrl, "", SourceUrl)`
+- the `SourceUrl` should be the actual full url on third-party server.
+
+If the data is pre-processed, a `Recipe` must be provided.
+
+An example from the `PXD000001` data set is the raw `mzML` file, which
+is directly downloaded from the PRIDE server and read into R as an
+`mzRpwiz` object:
+
+```
+SourceType: mzML
+RDataClass: mzRpwiz
+Recipe: NA
+Location_Prefix: ftp://ftp.pride.ebi.ac.uk/
+RDataPath: pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
+SourceUrl: ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
+```
+
+#### Scenario 2 {-}
+
+Files that need to be downloaded from a third-party provider such as
+the PRIDE server, pre-processed and the pre-processed product is
+stored on AnnotationHub Amazon s3 machine. The user directly gets the
+object from Amazon S3 instance:
+
+- the `Recipe` argument **should not be** `NA`.
+- the `Location_Prefix` **should be** the `.amazonBaseUrl`.
+- the `RDataPath` should correspond to the directory structure after
+  `.amazonBaseUrl` on the Amazon s3 instance. Typically, the directory
+  structure on the Amazon S3 instance mimics the directory structure
+  on the original server.
+- the `SourceUrl` should be the actual url on third-party server.
+
+An example from the `PXD000001` data set is the `fasta` file. It
+originates from the
+[PRIDE ftp server](ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2012/03/PXD000001/),
+but is processed into and `AAStringSet` and stored/server on the
+AnnotationHub Amazon S3 instance.
+
+```
+SourceType: FASTA
+RDataClass: AAStringSet
+Recipe: ProteomicsAnnotationHubData:::PXD000001FastaToAAStringSet
+Location_Prefix: http://s3.amazonaws.com/annotationhub/
+RDataPath: pride/data/archive/2012/03/PXD000001/erwinia_carotovora.rda
+SourceUrl: ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2012/03/PXD000001/erwinia_carotovora.fasta
+```
+
+Another example is the `mzTab` file with peptide-level quantitation
+data, that is served from the Amazon instance as an `MSnSet` object.
+
+```
+SourceType: mzTab
+RDataClass: MSnSet
+Recipe: ProteomicsAnnotationHubData:::PXD000001MzTabToMSnSet
+Location_Prefix: http://s3.amazonaws.com/annotationhub/
+RDataPath: pride/data/archive/2012/03/PXD000001/F063721.dat-MSnSet.rda
+SourceUrl: ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2012/03/PXD000001/F063721.dat-mztab.txt
+```
+
+#### Scenario 3 {-}
+
+The original data file and the Bioconductor data object are stored on
+the AnnotationHub Amazon S3 instance and directly served to the user
+upon request.
+
+An example from the `PXD000001` data set is the `mzid` file, which is
+not available from the PRIDE ftp server (only a Macot `dat` file is
+provided).
+
+```
+SourceType: mzid
+RDataClass: mzRident
+Recipe: NA
+Location_Prefix: http://s3.amazonaws.com/annotationhub/
+RDataPath: pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid
+SourceUrl: http://s3.amazonaws.com/annotationhub/pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid
+```
+
+### Preparer functions {-}
+
+Preparer functions and recipes are only required if the `rda` file is
+prepared on the `AnnotationHub` Amazon S3 instance.
+
+## Testing
+
+<!-- ### Generic tests {-} -->
+
+<!-- **TODO**, when generating the AH data -->
+
+<!-- - Check that `SourceType`, `DispatchClass` and `RDataClass` match. -->
+<!-- - Checking file types that have a base URL on amazon or PRIDE. -->
+
+### Experiment/data unit tests {-}
+
+When new data/experiments or even file types are added, the procedure
+to add new `AnnotationHub` items will be streamlined, revised,
+simplified and hopefully automated. To make sure that any of these
+updates do not alter the format/annotation, a set of
+experiment-specific unit tests are set up, that compare the metadata
+created in this package and the metadata extracted from
+`AnnotationHub`.
+
+
+See for example `./tests/testthat/test_PXD000001.R`.
