@@ -1,23 +1,24 @@
 Package: ProteomicsAnnotationHubData
 Title: Transform public proteomics data resources into Bioconductor
-        Data Structures
+       Data Structures
 Version: 0.99.2
-Authors@R: c(person("Gatto", "Laurent", role=c("aut", "cre"), email =
-        "lg390@cam.ac.uk"), person("Sonali", "Arora", role="aut"))
+Authors@R: c(person("Gatto", "Laurent", role=c("aut", "cre"),
+   	            email = "lg390@cam.ac.uk"),
+             person("Sonali", "Arora", role="aut"))
 Maintainer: Laurent Gatto <lg390@cam.ac.uk>
 Description: These recipes convert a variety and a growing number of
-        public proteomics data sets into easily-used standard
-        Bioconductor data structures.
+             public proteomics data sets into easily-used standard
+             Bioconductor data structures.
 Depends: AnnotationHub (>= 2.1.32), AnnotationHubData
-Imports: mzR (>= 2.3.2), MSnbase, Biostrings, GenomeInfoDb, utils,
-        Biobase, BiocInstaller
+Imports: mzR (>= 2.3.2), MSnbase, Biostrings, GenomeInfoDb, utils, Biobase,
+         BiocInstaller
 Suggests: knitr, BiocStyle, rmarkdown, testthat
 biocViews: DataImport, Proteomics
 VignetteBuilder: knitr
 License: Artistic-2.0
 URL: https://github.com/lgatto/ProteomicsAnnotationHubData
-BugReports:
-        https://github.com/lgatto/ProteomicsAnnotationHubData/issues
-Collate: ProteomicsAnnotationHubData.R utils.R PXD000001.R zzz.R
-NeedsCompilation: no
-Author: Gatto Laurent [aut, cre], Sonali Arora [aut]
+BugReports: https://github.com/lgatto/ProteomicsAnnotationHubData/issues
+Collate: ProteomicsAnnotationHubData.R
+	 utils.R
+	 PXD000001.R
+	 zzz.R	

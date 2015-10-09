@@ -1,0 +1,66 @@
+# `AnnotationHub` for proteomics
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r env, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+suppressPackageStartupMessages(library("BiocStyle"))
+```
+
+The aim of this package is to offer access to mass spectrometry and
+proteomics data throught the `r Biocpkg("AnnotationHub")`
+infrastructure.
+
+
+
+```{r ahinit}
+library("AnnotationHub")
+ah <- AnnotationHub()
+ah
+```
+
+We can extract the entries that originate from the PRIDE database:
+
+```{r provider}
+ah[ah$dataprovider == "PRIDE"]
+```
+
+Or those of a specific project
+
+```{r title}
+ah[grep("PXD000001", ah$title)]
+```
+
+To see the metadata of a specific entry, we use its AnnotationHub
+entry number inside single `[`
+
+```{r ah49008}
+ah["AH49008"]
+```
+
+To access the actual data, raw mass spectrometry data in this case, we
+double the `[[`
+
+```{r rawmsdata}
+library("mzR")
+rw <- ah[["AH49008"]]
+rw
+```
+
+In this case, we have an instance of class `r as.character(class(rw))`,
+that can be processed as anticipated.
+
+In the short demonstration above, we had **direct** and
+**standardised** access to the raw data, without a need to manually
+open this raw data or worry about the file format. The data was
+prepared and converted into a **standard Bioconductor data types** for
+immediate consumption by the user. This is also valid for other
+relevant data types such as identification results, fasta files or
+protein of peptide quantitation data.
+
+See the `ProteomicsAnnotationHubData` vignette for details on
+available data and how to add new proteomics data to AnnotationHub.
