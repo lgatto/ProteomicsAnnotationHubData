@@ -1,3 +1,8 @@
+CHANGES IN VERSION 0.99.3
+-------------------------
+ o removing .get1 methods and pointing to relevant AnnotationHub file
+   <2015-10-09 Fri>
+ 
 CHANGES IN VERSION 0.99.2
 -------------------------
  o Use AnnotationHub::query() instead of manual subsetting
