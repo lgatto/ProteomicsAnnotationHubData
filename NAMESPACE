@@ -1,4 +1,5 @@
 import("AnnotationHub")
+import("curl")
 import("AnnotationHubData")
 import("MSnbase")
 import("mzR")
