@@ -1,3 +1,8 @@
+CHANGES IN VERSION 0.99.4
+-------------------------
+ o Manually setting flInfo in .ftpfileinfo2 for files located on S3
+   <2015-12-15 Tue>
+ 
 CHANGES IN VERSION 0.99.3
 -------------------------
  o removing .get1 methods and pointing to relevant AnnotationHub file
