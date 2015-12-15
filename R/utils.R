@@ -5,10 +5,29 @@ AnnotationHubMetadata <- AnnotationHubData:::AnnotationHubMetadata
 
 .prideBaseUrl <- "ftp://ftp.pride.ebi.ac.uk/"
 
-.ftpFileInfo2 <- function(...) {
-    flInfo <- AnnotationHubData:::.ftpFileInfo(...)
-    if (is.na(flInfo$date)) flInfo$date <- Sys.time()
-    flInfo
+.ftpFileInfo2 <- function (url, filename, tag) {
+    firsturl <- ifelse(length(url) > 1, url[1], url)
+    curlHandle <- curl::new_handle()
+    curl::handle_setopt(curlHandle, dirlistonly = TRUE)
+    allurls <- lapply(url, function(ul) {
+        ## .ftpFileInfo does not work for files on AHS3. See
+        ## https://github.com/lgatto/ProteomicsAnnotationHubData/issues/8
+        ## for details. We need to set the SourceUrl manually.
+        if (grepl("s3.amazonaws.com", ul))
+            return(paste0(url, filename))
+        con <- curl::curl(ul, "r")
+        txt <- read.table(con, stringsAsFactors = FALSE, fill = TRUE)
+        close(con)
+        df2 <- txt[[9]]
+        df2 <- df2[grep(paste0(filename, "$"), df2)]
+        drop <- grepl("00-", df2)
+        df2 <- df2[!drop]
+        paste0(ul, df2)
+    })
+    allurls <- unlist(allurls)
+    curl::handle_reset(curlHandle)
+    df <- AnnotationHubData:::.httrFileInfo(allurls, verbose = TRUE)
+    base::cbind(df, genome = tag, stringsAsFactors = FALSE)
 }
 
 ProteomicsAnnotationHubDataProviders <-
@@ -51,17 +70,15 @@ fixMetaDataList <- function(x, n) {
 ##' @return Update list of metadat fields
 addSourceUrlVersion <- function(x) {
     x$FullUrl <- paste0(x$SourceBaseUrl, .prideDir)
+    ## .ftpFileInfo does not work for files on AHS3. See
+    ## https://github.com/lgatto/ProteomicsAnnotationHubData/issues/8
+    ## for details. We need to set the SourceUrl manually in
+    ## ProteomicsAnnotationHubData.ftpFileInfo2 (rather that using
+    ## AnnotationHubData:::.ftpFileinfo)
     flInfo <- Map(.ftpFileInfo2,
                   url = x$FullUrl,
                   filename = x$File,
                   tag = NA_character_)
-    ## .ftpFileInfo does not work for files on AHS3. See
-    ## https://github.com/lgatto/ProteomicsAnnotationHubData/issues/8
-    ## for details. We need to set the SourceUrl manually.
-    if (any(i <- x$SourceBaseUrl == .amazonBaseUrl)) {
-        for (ii in which(i))
-            flInfo[[ii]]$fileurl <- paste0(x$FullUrl[ii], x$File[[ii]])
-    }
     flInfo <- do.call(rbind, flInfo)
     flInfo$date <- as.character(flInfo$date)
     x$SourceUrl <- flInfo[, 1]
