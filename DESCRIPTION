@@ -20,5 +20,5 @@ URL: https://github.com/lgatto/ProteomicsAnnotationHubData
 BugReports: https://github.com/lgatto/ProteomicsAnnotationHubData/issues
 Collate: ProteomicsAnnotationHubData.R
 	 utils.R
-	 PXD000001.R
+	 PAHD.R
 	 zzz.R	
