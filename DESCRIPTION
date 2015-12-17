@@ -1,7 +1,7 @@
 Package: ProteomicsAnnotationHubData
 Title: Transform public proteomics data resources into Bioconductor
        Data Structures
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: c(person("Gatto", "Laurent", role=c("aut", "cre"),
    	            email = "lg390@cam.ac.uk"),
              person("Sonali", "Arora", role="aut"))

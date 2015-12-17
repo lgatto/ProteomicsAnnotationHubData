@@ -17,5 +17,25 @@ ProteomicsAnnotationHubData <- function()
 availableProteomicsAnnotationHubData <-
     c("PXD000001")
 
+
+## less typing
+AnnotationHubMetadata <- AnnotationHubData:::AnnotationHubMetadata
+.expandLine <- AnnotationHubData:::.expandLine
+.amazonBaseUrl <- AnnotationHubData:::.amazonBaseUrl
+
+## Global variables
+.prideBaseUrl <- "ftp://ftp.pride.ebi.ac.uk/"
 ahroot <- "/var/FastRWeb/web"
-BiocVersion <- as.character(BiocInstaller:::biocVersion()) ## "3.2"
+BiocVersion <- as.character(BiocInstaller:::biocVersion()) ## "3.3"
+
+ProteomicsAnnotationHubDataProviders <-
+    list(PRIDE = c(name = "PRIDE", baseUrl = .prideBaseUrl),
+         AHS3 = c(name = "AHS3", baseUrl = .amazonBaseUrl))
+
+ProteomicsAnnotationHubDataTags <-
+    c("Proteomics",
+      "TMT6", "TMT10", "iTRAQ4", "iTRAQ8",
+      "LFQ", "SC", "SILAC",
+      "PMID:1234567",
+      "SWATH", "MSE", "MRM", "SRM", "PRM",
+      "Instrument name")

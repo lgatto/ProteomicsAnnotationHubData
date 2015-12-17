@@ -13,4 +13,5 @@ importFrom("utils", "packageVersion", "packageDescription",
            "vignette", "download.file")
 
 export(ProteomicsAnnotationHubData,
+       writePahdTemplate,
        availableProteomicsAnnotationHubData)
