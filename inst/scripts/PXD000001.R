@@ -1,11 +1,9 @@
+library("ProteomicsAnnotationHubData")
 library("AnnotationHubData")
-source("../../R/utils.R")
-source("../../R/ProteomicsAnnotationHubData.R")
-source("../../R/PAHD.R")
 
-.prideDir <- "pride/data/archive/2012/03/PXD000001/"
+## resourceDir <- "pride/data/archive/2012/03/PXD000001/"
 
-PXD000001 <- makePadhList("../extdata/PXD000001.dcf", .prideDir)
+PXD000001 <- PAHD("../extdata/PXD000001.dcf")
 
 makePXD000001fasta <-
     function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=biocVersion())
@@ -50,8 +48,6 @@ PXD000001FastaToAAStringSet <- function(ahm) {
     outputFile(ahm)
 }
 
-## library("ProteomicsAnnotationHubData")
-
 insertFlag <- FALSE
 ## metadataOnly should be FALSE, when saving the Rda file on amazon S3
 mdonly <- TRUE
@@ -75,3 +71,9 @@ PXD000001MzID <-
     AnnotationHubData::updateResources(ahroot, insert = insertFlag,
                                        preparerClasses = "PXD000001MzidToMzRidentPreparer",
                                        metadataOnly = mdonly , justRunUnitTest = FALSE)
+
+## save for unit tests
+save(PXD000001Fasta, file = "../extdata/PXD000001Fasta.rda")
+save(PXD000001MSnSet, file = "../extdata/PXD000001MSnSet.rda")
+save(PXD000001MzML, file = "../extdata/PXD000001MzML.rda")
+save(PXD000001MzID, file = "../extdata/PXD000001MzID.rda")

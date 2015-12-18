@@ -48,24 +48,27 @@ addSourceUrlVersion <- function(x, .prideDir) {
     x
 }
 
-
-##' Takes a list of PAHD instances and returns a subset matching the
-##' requested resource. 
+##' Takes a list of \code{PAHD} instances and returns a subset
+##' matching the requested resource.
 ##'
 ##' @title Make an AnnotationHubMeta resource
-##' @param x A list of PAHD instances
-##' @param resource A character with the desired resource
-##' @return A list of PAHD instances, matching resource
+##' @param x A list of \code{PAHD} instances.
+##' @param resource A \code{character} of length 1 with the desired
+##'     resource. See \code{proteomicsAnnotationHubDataResources} for
+##'     a list of available resourcs.
+##' @return A list of \code{PAHD} instances, matching \code{resource}.
 makeAnnotationHubMetadata <- function(x,
-                                      resource = c("FASTA",
-                                                   "mzTab",
-                                                   "mzid",
-                                                   "mzML")) {
+                                      resource = proteomicsAnnotationHubDataResources) {
     resource <- match.arg(resource)
     i <- grep(resource, sapply(x, slot, "SourceType"))
     x[i]
 }
 
+##' This function compares the metadata of a remote object \code{rem}
+##' available on AnnotationHub and a local \code{PAHD} object. If
+##' these are identical, \code{TRUE} is returned, \code{FALSE}
+##' otherwise.
+##' 
 ##' @title Are the remote and local instances identical
 ##' @param rem An instance of class \code{AnnotationHub}
 ##' @param loc An instance of class \code{AnnotationHubMetadata}

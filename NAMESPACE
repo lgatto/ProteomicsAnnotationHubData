@@ -13,5 +13,12 @@ importFrom("utils", "packageVersion", "packageDescription",
            "vignette", "download.file")
 
 export(ProteomicsAnnotationHubData,
+       makeAnnotationHubMetadata,
        writePahdTemplate,
-       availableProteomicsAnnotationHubData)
+       readPahdFiles,
+       PAHD,
+       availableProteomicsAnnotationHubData,
+       proteomicsAnnotationHubDataResources,
+       identicalRemLoc)
+
+exportClasses(PAHD)

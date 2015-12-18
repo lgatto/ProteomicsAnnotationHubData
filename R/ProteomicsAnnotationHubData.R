@@ -1,7 +1,9 @@
 ##' Read the \code{ProteomicsAnnotationHubData} vignette to get
 ##' started with using Proteomics data from AnnotationHub and writing
 ##' new recipes. Use \code{availableProteomicsAnnotationHubData()} to
-##' get a vector of available experiments.
+##' get a vector of available experiments. Use
+##' \code{proteomicsAnnotationHubDataResources()} to get a
+##' vector of available resources.
 ##'
 ##' @title Get started with ProteomicsAnnotationHubData
 ##' @return Used for its side-effect of opening the package
@@ -9,7 +11,7 @@
 ##' @author Laurent Gatto
 ##' @aliases availableProteomicsAnnotationHubData
 ##' @examples availableProteomicsAnnotationHubData
-ProteomicsAnnotationHubData <- function() 
+ProteomicsAnnotationHubData <- function()
     vignette("ProteomicsAnnotationHubData",
              package = "ProteomicsAnnotationHubData")
 
@@ -17,6 +19,9 @@ ProteomicsAnnotationHubData <- function()
 availableProteomicsAnnotationHubData <-
     c("PXD000001")
 
+##' @rdname ProteomicsAnnotationHubData
+proteomicsAnnotationHubDataResources <-
+    c("FASTA", "mzTab", "mzid", "mzML")
 
 ## less typing
 AnnotationHubMetadata <- AnnotationHubData:::AnnotationHubMetadata

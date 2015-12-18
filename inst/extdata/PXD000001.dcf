@@ -9,7 +9,7 @@
 
 Title: PXD000001: Erwinia carotovora and spiked-in protein fasta file
 Description: Four human TMT spliked-in proteins in an Erwinia
-	     carotovora background.  Expected reporter ion ratios:
+	     carotovora background. Expected reporter ion ratios:
 	     Erwinia peptides: 1:1:1:1:1:1; Enolase spike
 	     (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10; BSA spike
 	     (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1; PhosB spike
@@ -31,7 +31,7 @@ Tags: Proteomics, TMT6, LTQ Orbitrap Velos, PMID:23692960
 
 Title: PXD000001: Peptide-level quantitation data
 Description: Four human TMT spliked-in proteins in an Erwinia
-	     carotovora background.  Expected reporter ion ratios:
+	     carotovora background. Expected reporter ion ratios:
 	     Erwinia peptides: 1:1:1:1:1:1; Enolase spike
 	     (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10; BSA spike
 	     (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1; PhosB spike
@@ -54,7 +54,7 @@ Tags: Proteomics, TMT6, LTQ Orbitrap Velos, PMID:23692960
 
 Title: PXD000001: MS-GF+ identiciation data
 Description: Four human TMT spliked-in proteins in an Erwinia
-	     carotovora background.  Expected reporter ion ratios:
+	     carotovora background. Expected reporter ion ratios:
 	     Erwinia peptides: 1:1:1:1:1:1; Enolase spike
 	     (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10; BSA spike
 	     (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1; PhosB spike
@@ -78,7 +78,7 @@ Tags: Proteomics, TMT6, LTQ Orbitrap Velos, PMID:23692960
 
 Title: PXD000001: raw mass spectrometry data
 Description: Four human TMT spliked-in proteins in an Erwinia
-	     carotovora background.  Expected reporter ion ratios:
+	     carotovora background. Expected reporter ion ratios:
 	     Erwinia peptides: 1:1:1:1:1:1; Enolase spike
 	     (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10; BSA spike
 	     (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1; PhosB spike
