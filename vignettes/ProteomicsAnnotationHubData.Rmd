@@ -146,15 +146,7 @@ experiment are served through `AnnotationHub`.
    package.
 
 
-# Data and metadata
-
-This section describes how `ProteomicsAnnotationHubData` are described
-and generated. See also the `r Biocpkg("AnnotationHub")` package for
-additional documentation.
-
-## Annotation
-
-### Updates {-}
+# Adding new datasets
 
 To suggest updates and/or new mass spectrometry and/or proteomics
 data, please post your suggestions/request on the
@@ -163,6 +155,24 @@ a
 [github issue](https://github.com/lgatto/ProteomicsAnnotationHubData/issues).
 Contributions can also be made to the
 [package github repository](https://github.com/lgatto/ProteomicsAnnotationHubData).
+
+## Input files
+
+- Input dcf files - explain
+- `writePahdTemplate()`
+
+
+## Data and metadata
+
+This section describes how `ProteomicsAnnotationHubData` are described
+and generated. See also the `r Biocpkg("AnnotationHub")` package for
+additional documentation.
+
+```{r PXD000001.dcf, echo=FALSE}
+f <- list.files(system.file("extdata", package = "ProteomicsAnnotationHubData"),
+                full.names = TRUE)
+readPahdFiles(f)
+```
 
 ### Title {-}
 
@@ -349,6 +359,10 @@ SourceUrl: http://s3.amazonaws.com/annotationhub/pride/data/archive/2012/03/PXD0
 
 Preparer functions and recipes are only required if the `rda` file is
 prepared on the `AnnotationHub` Amazon S3 instance.
+
+## Preparing data
+
+See `inst/scripts/PXD000001.R`.
 
 ## Testing
 
