@@ -1,8 +1,6 @@
 library("ProteomicsAnnotationHubData")
 library("AnnotationHubData")
 
-## resourceDir <- "pride/data/archive/2012/03/PXD000001/"
-
 PXD000001 <- PAHD("../extdata/PXD000001.dcf")
 
 makePXD000001fasta <-
