@@ -158,7 +158,7 @@ Contributions can also be made using
 
 ## Input files
 
-Starting with # `r Biocpkg("ProteomicsAnnotationHubData")` version
+Starting with `r Biocpkg("ProteomicsAnnotationHubData")` version
 `1.1.2`, preparing data for submission can be done by writing simple
 metadata files in Debian Control File (DCF) format. DCF is a simple
 format for storing key:value pairs in plain text files that can easily
@@ -171,11 +171,20 @@ Each DCF file can document one or more data files and, as opposed to
 the default R specification, comment lines starting with a `#` are
 supported (inline comments are not supported).  The fields that
 **must** be documented in these ProteomicsAnnotationhubData (PAHD)
-files are detailed in the next section. The `writePahdTemplate`
-function prepares a PAHD DCF template.
+files are detailed in the next section. 
+
+An example, taken from `r dir(system.file("extdata", package =
+"ProteomicsAnnotationHubData"), full.names = TRUE, pattern =
+"PXD000001.dcf")` is illustrated below:
+
+```{r, echo=FALSE}
+cat(readLines(dir(system.file("extdata", package = "ProteomicsAnnotationHubData"), full.names = TRUE, pattern = "PXD000001.dcf"))[10:30], sep = "\n")
+```
+
+The `writePahdTemplate` function prepares a PAHD DCF template.
 
 ```{r}
-writePahdTemplate("")
+writePahdTemplate()
 ```
 
 ## Required data and metadata
@@ -492,7 +501,6 @@ setMethod(".get1", "AAStringSetResource",
 
 If you have new types of data, please contact `r
 Biocpkg("ProteomicsAnnotationHubData")`'s maintainer.
-
 
 ## Testing
 
