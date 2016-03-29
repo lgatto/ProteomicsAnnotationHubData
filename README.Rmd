@@ -23,10 +23,11 @@ ah <- AnnotationHub()
 ah
 ```
 
-We can extract the entries that originate from the PRIDE database:
+Let's start by querying the entries that originate from the PRIDE
+database:
 
 ```{r provider}
-ah[ah$dataprovider == "PRIDE"]
+query(ah, "PRIDE")
 ```
 
 Or those of a specific project

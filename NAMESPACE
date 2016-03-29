@@ -1,5 +1,5 @@
 import("AnnotationHub")
-import("curl")
+importFrom("RCurl", "getURL")
 import("AnnotationHubData")
 import("MSnbase")
 import("mzR")
@@ -10,7 +10,15 @@ importFrom("Biobase", "addVigs2WinMenu")
 importFrom("BiocInstaller", "biocVersion")
 
 importFrom("utils", "packageVersion", "packageDescription",
-           "vignette", "download.file")
+           "vignette", "download.file", "read.table")
 
 export(ProteomicsAnnotationHubData,
-       availableProteomicsAnnotationHubData)
+       makeAnnotationHubMetadata,
+       writePahdTemplate,
+       readPahdFiles,
+       PAHD,
+       availableProteomicsAnnotationHubData,
+       proteomicsAnnotationHubDataResources,
+       identicalRemLoc)
+
+exportClasses(PAHD)

@@ -5,7 +5,7 @@
 
 
 The aim of this package is to offer access to mass spectrometry and
-proteomics data throught the *[AnnotationHub](http://bioconductor.org/packages/release/bioc/html/AnnotationHub.html)*
+proteomics data throught the *[AnnotationHub](http://bioconductor.org/packages/AnnotationHub)*
 infrastructure.
 
 
@@ -13,11 +13,35 @@ infrastructure.
 
 ```r
 library("AnnotationHub")
+#> Loading required package: BiocGenerics
+#> Loading required package: methods
+#> Loading required package: parallel
+#> 
+#> Attaching package: 'BiocGenerics'
+#> 
+#> The following objects are masked from 'package:parallel':
+#> 
+#>     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+#>     clusterExport, clusterMap, parApply, parCapply, parLapply,
+#>     parLapplyLB, parRapply, parSapply, parSapplyLB
+#> 
+#> The following objects are masked from 'package:stats':
+#> 
+#>     IQR, mad, xtabs
+#> 
+#> The following objects are masked from 'package:base':
+#> 
+#>     anyDuplicated, append, as.data.frame, as.vector, cbind,
+#>     colnames, do.call, duplicated, eval, evalq, Filter, Find, get,
+#>     grep, grepl, intersect, is.unsorted, lapply, lengths, Map,
+#>     mapply, match, mget, order, paste, pmax, pmax.int, pmin,
+#>     pmin.int, Position, rank, rbind, Reduce, rownames, sapply,
+#>     setdiff, sort, table, tapply, union, unique, unlist, unsplit
 ah <- AnnotationHub()
-#> snapshotDate(): 2015-08-17
+#> snapshotDate(): 2015-11-19
 ah
 #> AnnotationHub with 35372 records
-#> # snapshotDate(): 2015-08-17 
+#> # snapshotDate(): 2015-11-19 
 #> # $dataprovider: BroadInstitute, UCSC, Ensembl, ftp://ftp.ncbi.nlm.nih....
 #> # $species: Homo sapiens, Mus musculus, Bos taurus, Pan troglodytes, Da...
 #> # $rdataclass: GRanges, BigWigFile, FaFile, ChainFile, OrgDb, Inparanoi...
@@ -32,20 +56,21 @@ ah
 #>   AH5     | Ailuropoda_melanoleuca.ailMel1.69.ncrna.fa          
 #>   AH6     | Ailuropoda_melanoleuca.ailMel1.69.pep.all.fa        
 #>   ...       ...                                                 
-#>   AH49568 | gencode.vM6.chr_patch_hapl_scaff.transcripts.fa.gz  
-#>   AH49569 | gencode.vM6.lncRNA_transcripts.fa.gz                
-#>   AH49570 | gencode.vM6.pc_transcripts.fa.gz                    
-#>   AH49571 | gencode.vM6.pc_translations.fa.gz                   
-#>   AH49572 | gencode.vM6.transcripts.fa.gz
+#>   AH49587 | org.Ce.eg.db.sqlite                                 
+#>   AH49588 | org.Xl.eg.db.sqlite                                 
+#>   AH49589 | org.Sc.sgd.db.sqlite                                
+#>   AH49590 | org.Dr.eg.db.sqlite                                 
+#>   AH49591 | org.Pf.plasmo.db.sqlite
 ```
 
-We can extract the entries that originate from the PRIDE database:
+Let's start by querying the entries that originate from the PRIDE
+database:
 
 
 ```r
-ah[ah$dataprovider == "PRIDE"]
+query(ah, "PRIDE")
 #> AnnotationHub with 4 records
-#> # snapshotDate(): 2015-08-17 
+#> # snapshotDate(): 2015-11-19 
 #> # $dataprovider: PRIDE
 #> # $species: Erwinia carotovora
 #> # $rdataclass: AAStringSet, MSnSet, mzRident, mzRpwiz
@@ -66,7 +91,7 @@ Or those of a specific project
 ```r
 ah[grep("PXD000001", ah$title)]
 #> AnnotationHub with 4 records
-#> # snapshotDate(): 2015-08-17 
+#> # snapshotDate(): 2015-11-19 
 #> # $dataprovider: PRIDE
 #> # $species: Erwinia carotovora
 #> # $rdataclass: AAStringSet, MSnSet, mzRident, mzRpwiz
@@ -88,7 +113,7 @@ entry number inside single `[`
 ```r
 ah["AH49008"]
 #> AnnotationHub with 1 record
-#> # snapshotDate(): 2015-08-17 
+#> # snapshotDate(): 2015-11-19 
 #> # names(): AH49008
 #> # $dataprovider: PRIDE
 #> # $species: Erwinia carotovora
@@ -111,7 +136,9 @@ double the `[[`
 
 ```r
 library("mzR")
+#> Loading required package: Rcpp
 rw <- ah[["AH49008"]]
+#> loading from cache '/home/lg390/.AnnotationHub/55314'
 rw
 #> Mass Spectrometry file handle.
 #> Filename:  55314 

@@ -1,0 +1,101 @@
+## FILES:
+## 1. erwinia_carotovora.fasta: from PRIDE server, stored as
+##    AAStringSet on AH S3.
+## 2. F063721.dat-mztab.txt: from PRIDE, stored as MSnSet on AH S3.
+## 3. TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid:
+##    from AH S4 server, loaded by mzR:openIDfile.
+## 4. TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML:
+##    from PRIDE server, load by mzR::openMSfile.
+
+Title: PXD000001: Erwinia carotovora and spiked-in protein fasta file
+Description: Four human TMT spliked-in proteins in an Erwinia
+	     carotovora background. Expected reporter ion ratios:
+	     Erwinia peptides: 1:1:1:1:1:1; Enolase spike
+	     (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10; BSA spike
+	     (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1; PhosB spike
+	     (sp|P00489|PYGM_RABIT): 2:2:2:2:1:1; Cytochrome C spike
+	     (sp|P62894|CYC_BOVIN): 1:1:1:1:1:2.	 
+SourceType: FASTA
+Recipe: ProteomicsAnnotationHubData:::PXD000001FastaToAAStringSet
+RDataPath: pride/data/archive/2012/03/PXD000001/erwinia_carotovora.rda
+Location_Prefix: S3
+SourceUrl: PRIDE
+Species: Erwinia carotovora
+TaxonomyId: 554
+File: erwinia_carotovora.fasta
+DataProvider: PRIDE
+Maintainer: Laurent Gatto <lg390@cam.ac.uk>
+RDataClass: AAStringSet
+DispatchClass: AAStringSet
+Tags: Proteomics, TMT6, LTQ Orbitrap Velos, PMID:23692960
+
+Title: PXD000001: Peptide-level quantitation data
+Description: Four human TMT spliked-in proteins in an Erwinia
+	     carotovora background. Expected reporter ion ratios:
+	     Erwinia peptides: 1:1:1:1:1:1; Enolase spike
+	     (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10; BSA spike
+	     (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1; PhosB spike
+	     (sp|P00489|PYGM_RABIT): 2:2:2:2:1:1; Cytochrome C spike
+	     (sp|P62894|CYC_BOVIN): 1:1:1:1:1:2.	 
+SourceType: mzTab
+Recipe: ProteomicsAnnotationHubData:::PXD000001MzTabToMSnSet
+RDataPath: pride/data/archive/2012/03/PXD000001/F063721.dat-MSnSet.rda
+Location_Prefix: S3
+SourceUrl: PRIDE
+Species: Erwinia carotovora
+TaxonomyId: 554
+File: F063721.dat-mztab.txt
+DataProvider: PRIDE
+Maintainer: Laurent Gatto <lg390@cam.ac.uk>
+RDataClass: MSnSet
+DispatchClass: MSnSet
+Tags: Proteomics, TMT6, LTQ Orbitrap Velos, PMID:23692960
+
+
+Title: PXD000001: MS-GF+ identiciation data
+Description: Four human TMT spliked-in proteins in an Erwinia
+	     carotovora background. Expected reporter ion ratios:
+	     Erwinia peptides: 1:1:1:1:1:1; Enolase spike
+	     (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10; BSA spike
+	     (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1; PhosB spike
+	     (sp|P00489|PYGM_RABIT): 2:2:2:2:1:1; Cytochrome C spike
+	     (sp|P62894|CYC_BOVIN): 1:1:1:1:1:2.	 
+SourceType: mzid
+Recipe: 
+RDataPath: pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid
+Location_Prefix: S3
+SourceUrl: S3
+Species: Erwinia carotovora
+TaxonomyId: 554
+File: TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid
+DataProvider: PRIDE
+Maintainer: Laurent Gatto <lg390@cam.ac.uk>
+RDataClass: mzRident
+DispatchClass: mzRident
+Tags: Proteomics, TMT6, LTQ Orbitrap Velos, PMID:23692960
+
+
+
+Title: PXD000001: raw mass spectrometry data
+Description: Four human TMT spliked-in proteins in an Erwinia
+	     carotovora background. Expected reporter ion ratios:
+	     Erwinia peptides: 1:1:1:1:1:1; Enolase spike
+	     (sp|P00924|ENO1_YEAST): 10:5:2.5:1:2.5:10; BSA spike
+	     (sp|P02769|ALBU_BOVIN): 1:2.5:5:10:5:1; PhosB spike
+	     (sp|P00489|PYGM_RABIT): 2:2:2:2:1:1; Cytochrome C spike
+	     (sp|P62894|CYC_BOVIN): 1:1:1:1:1:2.	 
+SourceType: mzML
+Recipe: 
+RDataPath: pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
+Location_Prefix: PRIDE
+SourceUrl: PRIDE
+Species: Erwinia carotovora
+TaxonomyId: 554
+File: TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
+DataProvider: PRIDE
+Maintainer: Laurent Gatto <lg390@cam.ac.uk>
+RDataClass: mzRpwiz
+DispatchClass: mzRpwiz
+Tags: Proteomics, TMT6, LTQ Orbitrap Velos, PMID:23692960
+
+
