@@ -15,7 +15,7 @@ Use for its side effect of preparing a annotation
     template.
 }
 \description{
-Writes a simple template in cdf format (like an R package
+Writes a simple template in dcf format (like an R package
 DESCRIPTION file) that, once completed (see
 \code{ProteomicsAnnotationHub()} for details), can be imported
 with \code{\link{readPahdFiles}} or directly processed with

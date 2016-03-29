@@ -10,7 +10,7 @@
                   prototype = prototype(
                   new("Versioned", versions = c(PAHD = "0.1.0"))))
 
-##' Writes a simple template in cdf format (like an R package
+##' Writes a simple template in dcf format (like an R package
 ##' DESCRIPTION file) that, once completed (see
 ##' \code{ProteomicsAnnotationHub()} for details), can be imported
 ##' with \code{\link{readPahdFiles}} or directly processed with
