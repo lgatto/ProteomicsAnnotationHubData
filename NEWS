@@ -1,14 +1,21 @@
+CHANGES IN VERSION 1.1.2
+------------------------
+ o Major rewrite of the data preparation, now relying on simple dcf
+   files as input and intermediate PAHD objects. <2015-12-17 Thu>
+ o import read.table <2016-03-29 Tue>
+ o replace curl code by RCurl::getURL <2016-03-29 Tue>
+ 
 CHANGES IN VERSION 1.1.1
--------------------------
+------------------------
  o Manually setting flInfo in .ftpfileinfo2 for files located on S3
    <2015-12-15 Tue>
 
 CHANGES IN VERSION 1.1.0
--------------------------
+------------------------
  o Bioc devel 3.3
 
 CHANGES IN VERSION 1.0.0
--------------------------
+------------------------
  o Bioc release 3.2
  
 CHANGES IN VERSION 0.99.3

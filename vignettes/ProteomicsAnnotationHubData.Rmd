@@ -2,7 +2,7 @@
 title: "Proteomics Data in Annotation Hub"
 output:
   BiocStyle::html_document:
-     toc: false
+     toc: true
      toc_depth: 1
 vignette: >
   % \VignetteIndexEntry{Proteomics Data in Annotation Hub}
@@ -40,17 +40,17 @@ About `r Biocpkg("AnnotationHub")`:
 > client creates and manages a local cache of files retrieved by the
 > user, helping with quick and reproducible access.
 
-The goal of this project is to expand this functionality to mass
-spectrometry and proteomics.
+The goal of `r Biocpkg("ProteomicsAnnotationHubData")` is to expand
+this functionality to mass spectrometry and proteomics data.
 
 
 See the `AnnotationHub`'s
-[How-To's](http://bioconductor.org/packages/devel/bioc/vignettes/AnnotationHub/inst/doc/AnnotationHub-HOWTO.html)
+[How-To](http://bioconductor.org/packages/devel/bioc/vignettes/AnnotationHub/inst/doc/AnnotationHub-HOWTO.html)
 and
 [Access the AnnotationHub Web Service](http://bioconductor.org/packages/devel/bioc/vignettes/AnnotationHub/inst/doc/AnnotationHub.html)
 vignettes for a description on how to use it.
 
-## Accessing proteomics data {-}
+# Accessing proteomics data {-}
 
 ```{r ahinit}
 library("AnnotationHub")
@@ -146,60 +146,135 @@ experiment are served through `AnnotationHub`.
    package.
 
 
-# Data and metadata
-
-This section describes how `ProteomicsAnnotationHubData` are described
-and generated. See also the `r Biocpkg("AnnotationHub")` package for
-additional documentation.
-
-## Annotation
-
-### Updates {-}
+# Adding new datasets
 
 To suggest updates and/or new mass spectrometry and/or proteomics
 data, please post your suggestions/request on the
 [Bioconductor support site](https://support.bioconductor.org/) or open
 a
 [github issue](https://github.com/lgatto/ProteomicsAnnotationHubData/issues).
-Contributions can also be made to the
-[package github repository](https://github.com/lgatto/ProteomicsAnnotationHubData).
+Contributions can also be made using
+[github pull requests](https://github.com/lgatto/ProteomicsAnnotationHubData).
+
+## Input files
+
+Starting with `r Biocpkg("ProteomicsAnnotationHubData")` version
+`1.1.2`, preparing data for submission can be done by writing simple
+metadata files in Debian Control File (DCF) format. DCF is a simple
+format for storing key:value pairs in plain text files that can easily
+be directly read and written by humans. For example, package
+DESCRIPTION files follow the DCF format. See the details section in
+[`?read.dcf`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/dcf.html)
+for details about the format.
+
+Each DCF file can document one or more data files and, as opposed to
+the default R specification, comment lines starting with a `#` are
+supported (inline comments are not supported).  The fields that
+**must** be documented in these ProteomicsAnnotationhubData (PAHD)
+files are detailed in the next section. 
+
+An example, taken from `r dir(system.file("extdata", package =
+"ProteomicsAnnotationHubData"), full.names = TRUE, pattern =
+"PXD000001.dcf")` is illustrated below:
+
+```{r, echo=FALSE}
+cat(readLines(dir(system.file("extdata", package = "ProteomicsAnnotationHubData"), full.names = TRUE, pattern = "PXD000001.dcf"))[10:30], sep = "\n")
+```
+
+The `writePahdTemplate` function prepares a PAHD DCF template.
+
+```{r}
+writePahdTemplate()
+```
+
+## Required data and metadata
+
+This section describes how `ProteomicsAnnotationHubData` metadata
+ojects are described and generated. See also the `r
+Biocpkg("AnnotationHub")` package for additional documentation. Below
+is an excerpt of `PXD000001.dcf`
+
+```{r PXD000001.dcf, echo=FALSE}
+f <- list.files(system.file("extdata", package = "ProteomicsAnnotationHubData"),
+                full.names = TRUE, pattern = "PXD000001.dcf")
+cat(readLines(f)[10:30], sep = "\n")
+```
 
 ### Title {-}
 
 The title of a file should always be prefixed with its experiment
 identifier, such as
 
-```
-PXD000001: Erwinia carotovora and spiked-in protein fasta file
-```
-```
-PXD000001: Peptide-level quantitation data
-```
+### Description {-}
 
-### Tags {-}
+A short description of the experiment, generally a couple of lines.
 
-A list of suggested tags is shown below. These suggestions will be
-updated and completed over time.
+### Source types {-}
 
-```{r tags, echo=FALSE}
-ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataTags
-```
+These 3 field document the type/format of the original file and the R
+data class the file will be converted to. 
 
-### Providers  {-}
+|-------------------|---------|---------|-----------|--------------|--------|
+| **SourceType**    |  mzML   |   mzTab |   mzid    |      FASTA   | MSnSet |
+| **DispatchClass** | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
+| **RDataClass**    | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
 
-A list of predefined/tested providers. 
+### Recipe {-}
+
+The function that converts the data into its R data class. See below
+for further details.
+
+### RDataPath {-}
+
+The path to the R data file (see the scenarios below for more details).
+
+### Location_prefix {-}
+
+The path to the location of the file. Use `S3` if the file will be
+stored on the Amazon S3 instance or `PRIDE` if the file is to be
+retrieved from the PRIDE resource.
+
+### SourceUrl {-}
+
+The URL of the original source file. Use `S3` if the file will be
+stored on the Amazon S3 instance or `PRIDE` if the file is to be
+retrieved from the PRIDE resource.
+
+### Species {-}
+
+Scientific species name.
+
+### TaxonomyId {-}
+
+The NCBI taxonomy identifier. Can be found by searching the species
+name in http://www.ncbi.nlm.nih.gov/taxonomy.
+
+### File {-}
+
+The name of the source file.
+
+### DataProvider  {-}
+
+The original provider of the data.  A list of predefined/tested
+providers.
 
 ```{r providers, echo=FALSE}
 tab <- do.call(rbind, ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataProviders)
 knitr::kable(tab, row.names = FALSE)
 ```
 
-### Source types {-}
+### Maintainer {-}
 
-|-------------------|---------|---------|-----------|--------------|--------|
-| **SourceType**    |  mzML   |   mzTab |   mzid    |      FASTA   | MSnSet |
-| **DispatchClass** | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
-| **RDataClass**    | mzRpwiz |  MSnSet |  mzRident |  AAStringSet | MSnSet |
+Resource maintainer name and email address.
+
+### Tags {-}
+
+Frer from tags. A list of suggested tags is shown below. These
+suggestions will be updated and completed over time.
+
+```{r tags, echo=FALSE}
+ProteomicsAnnotationHubData:::ProteomicsAnnotationHubDataTags
+```
 
 ## Data location and associated metadata
 
@@ -239,21 +314,23 @@ provider. Multiple scenarios are can occur:
     files are not converted into objects *per se*, but an accessor
     object is produced to extract data directly from the data file.
 
-- `Location_Prefix` is either `.amazonBaseUrl`, when the file to be
-  loaded/read by the user exists on the AH Amazon S3 instance, or
-  `.prideBaseUrl` when it lives on the PRIDE ftp server.
+- `Location_Prefix` is either `S3`, when the file to be loaded/read by
+  the user exists on the AH Amazon S3 instance, or `PRIDE` when it
+  lives on the PRIDE ftp server. (These will be replaced by
+  `.amazonBaseUrl` and `.prideBaseUrl` respectively during data
+  preparation.)
 
 - `SourceUrl` is the full location of the original file. This is
   generally the third-party server, but not necessarily.
 
 - `RDataPath` is the path and filename of the file to be read into R
   and provided to the user. This field does not contain the server
-  address `.prideBaseUrl` or `.amazonBaseUrl` (see `Location_Prefix`).
+  address (`.prideBaseUrl`/`PRIDE` or `.amazonBaseUrl`/`S3`, see
+  `Location_Prefix`).
 
 - The metadata list, used to create the `AnnotationHubResources` also
   uses a `SourceBaseUrl`, which is the full url minus file name (that
   is in `File`) of the original file. Used to construct `SourceUrl`.
-
 
 ### Examples {-}
 
@@ -264,8 +341,8 @@ Refering back to the scenarios described above
 Files that are downloaded from the third-party resource, in our case
 PRIDE, and loaded directly into R without any pre-processing:
 
-- the `Recipe` argument **must be** `NA`.
-- the `Location_Prefix` should be the `.prideBaseUrl`.
+- the `Recipe` argument **must be** `NA`. Leave empty in the DCF file.
+- the `Location_Prefix` should be `PRIDE` (`.prideBaseUrl`).
 - the `RDdataPath` should be `sub(.prideBaseUrl, "", SourceUrl)`
 - the `SourceUrl` should be the actual full url on third-party server.
 
@@ -345,10 +422,85 @@ RDataPath: pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_iso
 SourceUrl: http://s3.amazonaws.com/annotationhub/pride/data/archive/2012/03/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid
 ```
 
-### Preparer functions {-}
+## Data preparation script
+
+The fully completed DCF files are added to `r
+Biocpkg("ProteomicsAnnotationHubData")`'s `extdata` directory and
+named accordin to the dataset's identifier using the `dcf` extension.
+
+Once the above metadata is prepared in one or multiple DCF files,
+these can be read into R with `PAHD`. Data preparation scripts are
+added to If you have new types of data, please contact `r
+Biocpkg("ProteomicsAnnotationHubData")`'s maintainer.  `r
+Biocpkg("ProteomicsAnnotationHubData")`'s `scripts` directory. Below
+are the first four lines of `PXD000001.R`:
+
+
+```{r PXD000001.R, echo=FALSE}
+f <- list.files(system.file("scripts", package = "ProteomicsAnnotationHubData"),
+                full.names = TRUE, pattern = "PXD000001.R")
+cat(readLines(f)[1:4], sep = "\n")
+```
+
+The rest of the preparation script calls various functions from the
+`r Biocpkg("AnnotationHubData")` package to create valid
+`AnnotationHubMetadata` instances. At the end, it is important to
+serialise the metadata objects in the `extdata` directory, as these
+will be used in the unit tests described below.
+
+## Preparer functions {-}
 
 Preparer functions and recipes are only required if the `rda` file is
 prepared on the `AnnotationHub` Amazon S3 instance.
+
+Below are the relevant functions for `mzRpwiz`, `mzRIdent`, `MSnSet`
+and `AAStringSet` resources. These are defined in `r
+Biocpkg("AnnotationHub")` `/R/AnnotationHubProteomicsResource-class.R`
+file. 
+
+```{r, eval=FALSE}
+setClass("mzRpwizResource", contains="AnnotationHubResource")
+setMethod(".get1", "mzRpwizResource",
+    function(x, ...) 
+{
+    .require("mzR")
+    yy <- cache(.hub(x))
+    mzR::openMSfile(yy, backend = "pwiz")
+})
+```
+
+```{r, eval=FALSE}
+setClass("mzRidentResource", contains="AnnotationHubResource")
+setMethod(".get1", "mzRidentResource",
+    function(x, ...) 
+{
+    .require("mzR")
+    yy <- cache(.hub(x))
+    mzR::openIDfile(yy)
+})
+```
+```{r, eval=FALSE}
+setClass("MSnSetResource", contains="RdaResource")
+setMethod(".get1", "MSnSetResource",
+    function(x, ...) 
+{
+    .require("MSnbase")
+    callNextMethod(x, ...) 
+})
+```
+```{r, eval=FALSE}
+setClass("AAStringSetResource", contains="AnnotationHubResource")
+setMethod(".get1", "AAStringSetResource",
+     function(x, ...) 
+{
+    .require("Biostrings")
+    yy <- cache(.hub(x))
+    Biostrings::readAAStringSet(yy)
+})
+```
+
+If you have new types of data, please contact `r
+Biocpkg("ProteomicsAnnotationHubData")`'s maintainer.
 
 ## Testing
 
