@@ -7,25 +7,19 @@ updateUrlLocation <- function(x) {
 
 .ftpFileInfo2 <- function (url, filename, tag) {
     firsturl <- ifelse(length(url) > 1, url[1], url)
-    curlHandle <- curl::new_handle()
-    curl::handle_setopt(curlHandle, dirlistonly = TRUE)
     allurls <- lapply(url, function(ul) {
         ## .ftpFileInfo does not work for files on AHS3. See
         ## https://github.com/lgatto/ProteomicsAnnotationHubData/issues/8
         ## for details. We need to set the SourceUrl manually.
         if (grepl("s3.amazonaws.com", ul))
             return(paste0(url, filename))
-        con <- curl::curl(ul, "r")
-        txt <- read.table(con, stringsAsFactors = FALSE, fill = TRUE)
-        close(con)
-        df2 <- txt[[9]]
-        df2 <- df2[grep(paste0(filename, "$"), df2)]
-        drop <- grepl("00-", df2)
-        df2 <- df2[!drop]
-        paste0(ul, df2)
+        txt <- RCurl::getURL(ul, ftp.use.epsv = FALSE, dirlistonly = TRUE)
+        txt <- strsplit(txt, "\r*\n")[[1]]
+        fn <- txt[match(filename, txt)]
+        if (is.na(fn)) stop("Could not match filename on remote directory!")
+        paste0(ul, fn)
     })
     allurls <- unlist(allurls)
-    curl::handle_reset(curlHandle)
     df <- AnnotationHubData:::.httrFileInfo(allurls, verbose = TRUE)
     base::cbind(df, genome = tag, stringsAsFactors = FALSE)
 }

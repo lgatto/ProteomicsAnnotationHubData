@@ -12,7 +12,6 @@ Description: These recipes convert a variety and a growing number of
 Depends:
     AnnotationHub (>= 2.1.45),
     AnnotationHubData,
-    curl
 Imports:
     mzR (>= 2.3.2),
     MSnbase,
@@ -20,7 +19,8 @@ Imports:
     GenomeInfoDb,
     utils,
     Biobase,
-    BiocInstaller
+    BiocInstaller,
+    RCurl
 Suggests:
     knitr,
     BiocStyle,

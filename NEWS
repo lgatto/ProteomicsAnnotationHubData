@@ -2,6 +2,8 @@ CHANGES IN VERSION 1.1.2
 ------------------------
  o Major rewrite of the data preparation, now relying on simple dcf
    files as input and intermediate PAHD objects. <2015-12-17 Thu>
+ o import read.table <2016-03-29 Tue>
+ o replace curl code by RCurl::getURL <2016-03-29 Tue>
  
 CHANGES IN VERSION 1.1.1
 ------------------------
