@@ -50,7 +50,7 @@ and
 [Access the AnnotationHub Web Service](http://bioconductor.org/packages/devel/bioc/vignettes/AnnotationHub/inst/doc/AnnotationHub.html)
 vignettes for a description on how to use it.
 
-# Accessing proteomics data {-}
+# Accessing proteomics data 
 
 ```{r ahinit}
 library("AnnotationHub")
@@ -190,8 +190,8 @@ writePahdTemplate()
 ## Required data and metadata
 
 This section describes how `ProteomicsAnnotationHubData` metadata
-ojects are described and generated. See also the `r
-Biocpkg("AnnotationHub")` package for additional documentation. Below
+ojects are described and generated. See also the 
+`r Biocpkg("AnnotationHub")` package for additional documentation. Below
 is an excerpt of `PXD000001.dcf`
 
 ```{r PXD000001.dcf, echo=FALSE}
