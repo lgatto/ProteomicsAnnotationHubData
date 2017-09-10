@@ -6,9 +6,9 @@ Authors@R: c(person("Gatto", "Laurent", role=c("aut", "cre"),
    	            email = "lg390@cam.ac.uk"),
              person("Sonali", "Arora", role="aut"))
 Maintainer: Laurent Gatto <lg390@cam.ac.uk>
-Description: These recipes convert a variety and a growing number of
-    public proteomics data sets into easily-used standard
-    Bioconductor data structures.
+Description: The ProteomicsAnnotationHubData package defines recipes
+    convert a variety and a growing number of public proteomics data
+    sets into easily-used standard Bioconductor data structures.
 Depends:
     AnnotationHub (>= 2.1.45),
     AnnotationHubData,
