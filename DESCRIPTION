@@ -19,7 +19,7 @@ Imports:
     GenomeInfoDb,
     utils,
     Biobase,
-    BiocInstaller,
+    BiocManager,
     RCurl
 Suggests:
     knitr,
