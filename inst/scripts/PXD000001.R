@@ -4,16 +4,16 @@ library("AnnotationHubData")
 PXD000001 <- PAHD("../extdata/PXD000001.dcf")
 
 makePXD000001fasta <-
-    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=biocVersion())
+    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=version())
         makeAnnotationHubMetadata(PXD000001, resource = "FASTA")
 makePXD000001mzTab <-
-    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=biocVersion())
+    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=version())
         makeAnnotationHubMetadata(PXD000001, resource = "mzTab")
 makePXD000001mzid <-
-    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=biocVersion())
+    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=version())
         makeAnnotationHubMetadata(PXD000001, resource = "mzid")
 makePXD000001mzML <-
-    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=biocVersion())
+    function(currentMetadata, justRunUnitTest = FALSE, BiocVersion=version())
         makeAnnotationHubMetadata(PXD000001, resource = "mzML")
 
 makeAnnotationHubResource("PXD000001FastaToAAStringSetPreparer", makePXD000001fasta)

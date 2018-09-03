@@ -1,9 +1,9 @@
 Package: ProteomicsAnnotationHubData
 Title: Transform public proteomics data resources into Bioconductor
     Data Structures
-Version: 1.11.0
+Version: 1.11.1
 Authors@R: c(person("Gatto", "Laurent", role=c("aut", "cre"),
-   	            email = "lg390@cam.ac.uk"),
+                    email = "lg390@cam.ac.uk"),
              person("Sonali", "Arora", role="aut"))
 Maintainer: Laurent Gatto <lg390@cam.ac.uk>
 Description: These recipes convert a variety and a growing number of

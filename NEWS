@@ -1,3 +1,12 @@
+CHANGES IN VERSION 1.11.1
+-------------------------
+- Replace BiocInstaller::biocVersion with BiocManager::version <2018-09-03 Mon>
+
+CHANGES IN VERSION 1.11.0
+-------------------------
+- New version for Bioc devel
+- Import BiocManager
+
 CHANGES IN VERSION 1.3.3
 ------------------------
  o Fix formatting in vignette <2016-06-26 Sun>
@@ -8,7 +17,7 @@ CHANGES IN VERSION 1.1.2
    files as input and intermediate PAHD objects. <2015-12-17 Thu>
  o import read.table <2016-03-29 Tue>
  o replace curl code by RCurl::getURL <2016-03-29 Tue>
- 
+
 CHANGES IN VERSION 1.1.1
 ------------------------
  o Manually setting flInfo in .ftpfileinfo2 for files located on S3
@@ -21,12 +30,12 @@ CHANGES IN VERSION 1.1.0
 CHANGES IN VERSION 1.0.0
 ------------------------
  o Bioc release 3.2
- 
+
 CHANGES IN VERSION 0.99.3
 -------------------------
  o removing .get1 methods and pointing to relevant AnnotationHub file
    <2015-10-09 Fri>
- 
+
 CHANGES IN VERSION 0.99.2
 -------------------------
  o Use AnnotationHub::query() instead of manual subsetting
@@ -35,7 +44,7 @@ CHANGES IN VERSION 0.99.2
 CHANGES IN VERSION 0.99.1
 -------------------------
  o Submission of Bioc (Issue 1292) <2015-08-25 Tue>
- 
+
 CHANGES IN VERSION 0.99.0
 -------------------------
  o  First release with data PXD000001
