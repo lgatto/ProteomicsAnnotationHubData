@@ -1,14 +1,14 @@
 Package: ProteomicsAnnotationHubData
 Title: Transform public proteomics data resources into Bioconductor
     Data Structures
-Version: 1.3.3
+Version: 1.11.0
 Authors@R: c(person("Gatto", "Laurent", role=c("aut", "cre"),
    	            email = "lg390@cam.ac.uk"),
              person("Sonali", "Arora", role="aut"))
 Maintainer: Laurent Gatto <lg390@cam.ac.uk>
-Description: The ProteomicsAnnotationHubData package defines recipes
-    convert a variety and a growing number of public proteomics data
-    sets into easily-used standard Bioconductor data structures.
+Description: These recipes convert a variety and a growing number of
+    public proteomics data sets into easily-used standard
+    Bioconductor data structures.
 Depends:
     AnnotationHub (>= 2.1.45),
     AnnotationHubData,
@@ -19,7 +19,7 @@ Imports:
     GenomeInfoDb,
     utils,
     Biobase,
-    BiocInstaller,
+    BiocManager,
     RCurl
 Suggests:
     knitr,
