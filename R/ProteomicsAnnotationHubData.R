@@ -31,7 +31,7 @@ AnnotationHubMetadata <- AnnotationHubData:::AnnotationHubMetadata
 ## Global variables
 .prideBaseUrl <- "ftp://ftp.pride.ebi.ac.uk/"
 ahroot <- "/var/FastRWeb/web"
-BiocVersion <- as.character(BiocManager:::version())
+BiocVersion <- as.character(BiocManager::version()) ## "3.3"
 
 ProteomicsAnnotationHubDataProviders <-
     list(PRIDE = c(name = "PRIDE", baseUrl = .prideBaseUrl),
